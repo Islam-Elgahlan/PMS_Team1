@@ -23,8 +23,6 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     AuthRoutingModule,
      SharedModule,
   ]
-  ,  exports: [
-    SharedModule,
-  ]
+  
 })
 export class AuthModule { }
