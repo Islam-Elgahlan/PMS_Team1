@@ -5,7 +5,8 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { MaterialModule } from './material/material/material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -14,12 +15,16 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SharedRoutingModule,
     MaterialModule,
     ToastrModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     MaterialModule,
     ToastrModule,
-    NgxDropzoneModule
-  ]
+    NgxDropzoneModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
