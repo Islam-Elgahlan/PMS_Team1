@@ -16,8 +16,6 @@ import { MatInputModule } from '@angular/material/input';
     MaterialModule,
     ToastrModule,
     NgxDropzoneModule,
-    MatFormFieldModule,
-    MatInputModule,
   ],
   exports: [
     MaterialModule,
