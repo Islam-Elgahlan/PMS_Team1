@@ -17,8 +17,6 @@ import { SharedModule } from '../shared/shared.module';
     AuthRoutingModule,
      SharedModule,
   ]
-  ,  exports: [
-    SharedModule,
-  ]
+  
 })
 export class AuthModule { }
