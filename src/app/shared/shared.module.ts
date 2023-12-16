@@ -14,7 +14,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SharedRoutingModule,
     MaterialModule,
     ToastrModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
   ],
   exports: [
     MaterialModule,
