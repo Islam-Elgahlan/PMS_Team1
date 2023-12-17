@@ -1,1 +1,108 @@
-<p>register works!</p>
+<section class="register">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="text-center m-auto w-50 my-2">
+                    <img src="../../../../assets/images/PMS 3.svg" class="w-75" alt="" />
+                </div>
+                <div class="auth-card">
+                    <div class="title mb-2">
+                        <span>Welcome to PMS</span>
+                        <h3 class="fs-3">Create new Account </h3>
+                    </div>
+                    <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>User Name</mat-label>
+                                    <input formControlName="userName" matInput placeholder="Enter User Name" />
+                                    <mat-error *ngIf="registerForm.controls.userName.hasError('required')">
+                                        User Name required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Email</mat-label>
+                                    <input formControlName="email" matInput placeholder="Enter Your E-mail" />
+                                    <mat-error
+                                        *ngIf="registerForm.controls.email.hasError('email') && !registerForm.controls.email.hasError('required')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="registerForm.controls.email.hasError('required')">
+                                        Email required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Country</mat-label>
+                                    <input formControlName="country" matInput placeholder="Enter Country" />
+                                    <mat-error *ngIf="registerForm.controls.country.hasError('required')">
+                                        Country required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input formControlName="phoneNumber" matInput placeholder="Enter Phone Number" />
+                                    <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('required')">
+                                        Country required
+                                    </mat-error>
+                                    <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('minlength')">
+                                        Phone Number must be at least 11 numbers
+                                    </mat-error>
+                                    <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('maxlength')">
+                                        Phone Number must be at most 13 numbers
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Password</mat-label>
+                                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            hide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="registerForm.controls.password.hasError('required')">
+                                        Password required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input formControlName="confirmPassword" matInput
+                                        [type]="confirmHide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="confirmHide = !confirmHide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            confirmHide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
+                                        Confirmed Password required
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="registerForm.controls.confirmPassword.hasError('confirmedValidator')">
+                                        Password not Matched
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="text-center my-3">
+                            <button class="primary text-center">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

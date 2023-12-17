@@ -35,4 +35,7 @@ export class AuthService {
   onLogin(data: iLogin): Observable<any> {
     return this._HttpClient.post('Users/Login', data);
   }
+  register(data:any):Observable<any>{
+    return this._HttpClient.post('Users/Register' , data)
+  }
 }
