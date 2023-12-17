@@ -12,7 +12,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$PMS-primary: mat.define-palette(mat.$indigo-palette);
+$PMS-primary: mat.define-palette(mat.$orange-palette);
 $PMS-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -44,6 +44,20 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field:not(.mat-form-field-disabled)
+  .mat-mdc-floating-label.mdc-floating-label {
+  color: #ef9b28;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: white !important;
+}
+
+
 .auth-card {
   background-color: #315951e5;
   padding: 2rem 1rem;
@@ -55,7 +69,6 @@ body {
       font-size: 16px;
     }
     h3 {
-       
       color: #ef9b28;
       position: relative;
       &::after {
@@ -70,4 +83,20 @@ body {
       }
     }
   }
+}
+
+button {
+  font-size: 18px;
+  border: none;
+  &.primary {
+    border-radius: 96px;
+    color: white;
+    width: 484px;
+    height: 56px;
+    background-color: #ef9b28;
+    &:hover{
+      opacity: 0.9;
+    }
+  }
+ 
 }
