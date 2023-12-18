@@ -64,7 +64,7 @@ export class RegisterComponent {
       myData.append(key, data.value[key])
     }
     // myData.append('profileImage', this.imgSrc, this.imgSrc.name);
-// console.log(data.value)
+console.log(data.value)
 // this._AuthService.register(myData).subscribe((res) => {
 //   this._ToastrService.success(data.value.email, 'Welcome');
 //   localStorage.setItem('email' , data.value.email)
@@ -75,23 +75,25 @@ export class RegisterComponent {
 //   error => {
 //     this._ToastrService.error(error.error.message, 'Error in Registeration');
 //   })
-this.openDialog()
+
+
+// this.openDialog()
 
   }
 
 
-  openDialog(): void {
-    const dialogRef = this._MatDialog.open(VerifyComponent, {
-      data: {},
-      width: '40%',
-    });
+  // openDialog(): void {
+  //   const dialogRef = this._MatDialog.open(VerifyComponent, {
+  //     data: {},
+  //     width: '40%',
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        // this.onResetRequest(result)
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(result);
+  //     if(result){
+  //       // this.onResetRequest(result)
+  //     }
+  //   });
+  // }
 
 }
