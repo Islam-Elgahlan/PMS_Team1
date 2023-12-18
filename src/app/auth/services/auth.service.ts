@@ -38,4 +38,13 @@ export class AuthService {
   register(data:any):Observable<any>{
     return this._HttpClient.post('Users/Register' , data)
   }
+  requestChangePassword(data:string):Observable<any>{
+    return this._HttpClient.post('Users/Reset/Request' , data)
+  }
+  resetPassword(data:any):Observable<any>{
+    return this._HttpClient.post('Users/Reset' , data)
+  }
+  changePassword(data:any):Observable<any>{
+    return this._HttpClient.put('Users/ChangePassword' , data)
+  }
 }
