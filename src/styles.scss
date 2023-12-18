@@ -88,15 +88,19 @@ body {
 button {
   font-size: 18px;
   border: none;
+
   &.primary {
     border-radius: 96px;
     color: white;
     width: 484px;
     height: 56px;
     background-color: #ef9b28;
+    margin-top: 5px;
     &:hover{
       opacity: 0.9;
     }
   }
- 
+ &:disabled{
+  background-color: #ef9c28ca;
+ }
 }

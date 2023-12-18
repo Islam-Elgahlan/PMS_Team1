@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RequestChangePasswordComponent } from './components/request-change-password/request-change-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     RegisterComponent,
     RequestChangePasswordComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    VerifyComponent
   ],
   imports: [
     CommonModule,
