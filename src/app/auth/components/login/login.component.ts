@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,21 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(private _AuthService: AuthService) {}
+  constructor(
+    private _AuthService: AuthService,
+    private _ToastrService: ToastrService,
+    private route: Router
+  ) {}
   hide: boolean = true;
 
   loginForm = new FormGroup({
-    email: new FormControl(null),
-    password: new FormControl(null),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,16}$'
+      ),
+    ]),
   });
 
   onSubmit(data: FormGroup) {
@@ -25,9 +36,13 @@ export class LoginComponent {
       },
       error: (err) => {
         console.log(err);
+        this._ToastrService.error(err.error.message, 'Error!');
+
       },
       complete: () => {
         this._AuthService.getProfile();
+        this.route.navigate(['/dashboard']);
+        this._ToastrService.success('Hello world!', 'Toastr fun!');
       },
     });
   }
