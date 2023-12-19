@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,39 +15,53 @@ import { VerifyComponent } from '../verify/verify.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
     private _Router: Router,
-    public _MatDialog: MatDialog,
-  ) { }
+    public _MatDialog: MatDialog
+  ) {}
   hide: boolean = true;
   confirmHide: boolean = true;
 
   imgSrc: any;
-  registerForm = new FormGroup({
-    userName: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    country: new FormControl(null, [Validators.required]),
-    phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(13)]),
-    // profileImage: new FormControl(null),
-    password: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-    confirmPassword: new FormControl(null, [Validators.required]),
-
-  },
+  registerForm = new FormGroup(
     {
-      validators: this.matchValidator('password', 'confirmPassword')
-    })
+      userName: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      country: new FormControl(null, [Validators.required]),
+      phoneNumber: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(13),
+      ]),
+      // profileImage: new FormControl(null),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      confirmPassword: new FormControl(null, [Validators.required]),
+    },
+    {
+      validators: this.matchValidator('password', 'confirmPassword'),
+    }
+  );
 
-  matchValidator(controlName: string, matchingControlName: string): ValidatorFn {
+  matchValidator(
+    controlName: string,
+    matchingControlName: string
+  ): ValidatorFn {
     return (abstractControl: AbstractControl) => {
       const control = abstractControl.get(controlName);
       const matchingControl = abstractControl.get(matchingControlName);
 
-      if (matchingControl!.errors && !matchingControl!.errors?.['confirmedValidator']) {
+      if (
+        matchingControl!.errors &&
+        !matchingControl!.errors?.['confirmedValidator']
+      ) {
         return null;
       }
 
@@ -53,33 +73,39 @@ export class RegisterComponent {
         matchingControl!.setErrors(null);
         return null;
       }
-    }
+    };
   }
 
-
   onRegister(data: FormGroup) {
-    let myData = new FormData()
-    let myMap = new Map(Object.entries(data.value))
+    let myData = new FormData();
+    let myMap = new Map(Object.entries(data.value));
     for (const [key, value] of myMap) {
-      myData.append(key, data.value[key])
+      myData.append(key, data.value[key]);
     }
-    if(this.imgSrc == null){
+    if (this.imgSrc == null) {
       // No Action
-    }else{
+    } else {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
-    
-    // console.log(data.value)
-    
-    this._AuthService.onRegister(myData).subscribe((res) => {
-      this._ToastrService.success(data.value.email, 'Check yor Email to Verify');
-      localStorage.setItem('email', data.value.email)
-      this._Router.navigate(['/auth/verify'])
 
-    },
-      error => {
-        this._ToastrService.error(error.error.message, 'Error in Registeration');
-      })
+    // console.log(data.value)
+
+    this._AuthService.onRegister(myData).subscribe(
+      (res) => {
+        this._ToastrService.success(
+          data.value.email,
+          'Check yor Email to Verify'
+        );
+        localStorage.setItem('email', data.value.email);
+        this._Router.navigate(['/auth/verify']);
+      },
+      (error) => {
+        this._ToastrService.error(
+          error.error.message,
+          'Error in Registeration'
+        );
+      }
+    );
   }
 
   files: File[] = [];
@@ -94,6 +120,4 @@ export class RegisterComponent {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
-
-
 }
