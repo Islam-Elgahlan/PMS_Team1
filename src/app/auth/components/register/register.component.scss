@@ -1,16 +1,32 @@
 .register {
-    background-image: url(../../../../assets/images/bg1.jpeg);
-     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  a{
-    cursor: pointer;
-  }
-  .mat-icon{
-    color: white;
-  }
+  background-image: url(../../../../assets/images/bg1.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  // height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  cursor: pointer;
+}
+
+.mat-icon {
+  color: white;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  overflow-y: hidden;  /* Hide vertical scrollbar */
+  overflow-x: hidden;  /* Hide horizontal scrollbar */
+
+
+}
+
+
+
