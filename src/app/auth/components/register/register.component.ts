@@ -12,10 +12,11 @@ import { VerifyComponent } from '../verify/verify.component';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+ 
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
-    private _Router: Router,
+    private route: Router,
     public _MatDialog: MatDialog,
   ) { }
   hide: boolean = true;
@@ -57,7 +58,7 @@ export class RegisterComponent {
   }
 
 
-  onRegister(data: FormGroup) {
+ onRegister(data: FormGroup) {
     let myData = new FormData()
     let myMap = new Map(Object.entries(data.value))
     for (const [key, value] of myMap) {

@@ -15,6 +15,8 @@ const routes: Routes = [
   {path:'request-change' , component:RequestChangePasswordComponent},
   {path:'reset-password' , component:ResetPasswordComponent},
   {path:'change-password' , component:ChangePasswordComponent},
+  {path:'verify' , component:VerifyComponent},
+
 
 ];
 
