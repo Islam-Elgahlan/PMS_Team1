@@ -12,11 +12,10 @@ import { VerifyComponent } from '../verify/verify.component';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
- 
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
-    private route: Router,
+    private _Router: Router,
     public _MatDialog: MatDialog,
   ) { }
   hide: boolean = true;
@@ -58,7 +57,7 @@ export class RegisterComponent {
   }
 
 
- onRegister(data: FormGroup) {
+  onRegister(data: FormGroup) {
     let myData = new FormData()
     let myMap = new Map(Object.entries(data.value))
     for (const [key, value] of myMap) {
@@ -72,7 +71,7 @@ export class RegisterComponent {
     
     // console.log(data.value)
     
-    this._AuthService.register(myData).subscribe((res) => {
+    this._AuthService.onRegister(myData).subscribe((res) => {
       this._ToastrService.success(data.value.email, 'Check yor Email to Verify');
       localStorage.setItem('email', data.value.email)
       this._Router.navigate(['/auth/verify'])
