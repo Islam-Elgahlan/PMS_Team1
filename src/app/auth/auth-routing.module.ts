@@ -5,6 +5,7 @@ import { RequestChangePasswordComponent } from './components/request-change-pass
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 const routes: Routes = [
   {path:'' , redirectTo:'login' , pathMatch:'full'},
@@ -13,6 +14,8 @@ const routes: Routes = [
   {path:'request-change' , component:RequestChangePasswordComponent},
   {path:'reset-password' , component:ResetPasswordComponent},
   {path:'change-password' , component:ChangePasswordComponent},
+  {path:'verify' , component:VerifyComponent},
+
 
 ];
 

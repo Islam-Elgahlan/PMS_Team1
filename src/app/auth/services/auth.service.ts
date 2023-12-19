@@ -35,8 +35,12 @@ export class AuthService {
   onLogin(data: iLogin): Observable<any> {
     return this._HttpClient.post('Users/Login', data);
   }
-  register(data:any):Observable<any>{
+  onRegister(data:any):Observable<any>{
     return this._HttpClient.post('Users/Register' , data)
+  }
+
+  onVerify(data:any):Observable<any>{
+    return this._HttpClient.put('Users/verify', data)
   }
   requestChangePassword(data:string):Observable<any>{
     return this._HttpClient.post('Users/Reset/Request' , data)
@@ -48,3 +52,5 @@ export class AuthService {
     return this._HttpClient.put('Users/ChangePassword' , data)
   }
 }
+
+

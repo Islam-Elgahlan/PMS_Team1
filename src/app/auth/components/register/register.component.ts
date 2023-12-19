@@ -12,10 +12,11 @@ import { VerifyComponent } from '../verify/verify.component';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+ 
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
-    private _Router: Router,
+    private route: Router,
     public _MatDialog: MatDialog,
   ) { }
   hide: boolean = true;
@@ -57,11 +58,25 @@ export class RegisterComponent {
   }
 
 
-  onRegister(data: FormGroup) {
+  onSubmit(data: FormGroup) {
     let myData = new FormData()
     let myMap = new Map(Object.entries(data.value))
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key])
+      this._AuthService.onRegister(myData).subscribe({
+        next: (res: any) => {
+          console.log(res);
+        },
+        error: (err: any) => {
+          console.log(err);
+          this._ToastrService.error('Error', 'Incorrect');
+        },
+        complete: () => {
+          // this.openDialog();
+          this._ToastrService.success('registered Successfully', 'Success');
+          this.route.navigate(['/auth/verify']);
+        },
+      });
     }
     // myData.append('profileImage', this.imgSrc, this.imgSrc.name);
 // console.log(data.value)
@@ -75,23 +90,25 @@ export class RegisterComponent {
 //   error => {
 //     this._ToastrService.error(error.error.message, 'Error in Registeration');
 //   })
-this.openDialog()
+// this.openDialog()
 
   }
 
 
-  openDialog(): void {
-    const dialogRef = this._MatDialog.open(VerifyComponent, {
-      data: {},
-      width: '40%',
-    });
+  // openDialog(): void {
+  //   const dialogRef = this._MatDialog.open(VerifyComponent, {
+  //     data: {},
+  //     width: '40%',
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        // this.onResetRequest(result)
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(result);
+  //     if(result){
+  //       // this.onResetRequest(result)
+  //     };
+      
+  //   });
+    
+  // }
 
 }
