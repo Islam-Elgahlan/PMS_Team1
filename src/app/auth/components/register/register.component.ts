@@ -75,7 +75,6 @@ export class RegisterComponent {
       this._ToastrService.success(data.value.email, 'Check yor Email to Verify');
       localStorage.setItem('email', data.value.email)
       this._Router.navigate(['/auth/verify'])
-      // console.log(res)
 
     },
       error => {
