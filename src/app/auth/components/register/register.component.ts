@@ -58,27 +58,12 @@ export class RegisterComponent {
   }
 
 
-  onSubmit(data: FormGroup) {
+ onRegister(data: FormGroup) {
     let myData = new FormData()
     let myMap = new Map(Object.entries(data.value))
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key])
-      this._AuthService.onRegister(myData).subscribe({
-        next: (res: any) => {
-          console.log(res);
-        },
-        error: (err: any) => {
-          console.log(err);
-          this._ToastrService.error('Error', 'Incorrect');
-        },
-        complete: () => {
-          // this.openDialog();
-          this._ToastrService.success('registered Successfully', 'Success');
-          this.route.navigate(['/auth/verify']);
-        },
-      });
     }
-
     if(this.imgSrc == null){
       // No Action
     }else{
@@ -91,7 +76,6 @@ export class RegisterComponent {
       this._ToastrService.success(data.value.email, 'Check yor Email to Verify');
       localStorage.setItem('email', data.value.email)
       this._Router.navigate(['/auth/verify'])
-     
 
     },
       error => {
