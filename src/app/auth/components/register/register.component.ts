@@ -26,33 +26,33 @@ export class RegisterComponent {
     userName: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     country: new FormControl(null, [Validators.required]),
-    phoneNumber: new FormControl(null, [Validators.required , Validators.minLength(11) , Validators.maxLength(13)]),
-    profileImage: new FormControl(null),
-    password: new FormControl(null, [Validators.required ,Validators.minLength(3)]),
+    phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(13)]),
+    // profileImage: new FormControl(null),
+    password: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     confirmPassword: new FormControl(null, [Validators.required]),
-    
+
   },
-  {
-    validators: this.matchValidator('password', 'confirmPassword')
-  })
+    {
+      validators: this.matchValidator('password', 'confirmPassword')
+    })
 
   matchValidator(controlName: string, matchingControlName: string): ValidatorFn {
     return (abstractControl: AbstractControl) => {
-        const control = abstractControl.get(controlName);
-        const matchingControl = abstractControl.get(matchingControlName);
+      const control = abstractControl.get(controlName);
+      const matchingControl = abstractControl.get(matchingControlName);
 
-        if (matchingControl!.errors && !matchingControl!.errors?.['confirmedValidator']) {
-            return null;
-        }
+      if (matchingControl!.errors && !matchingControl!.errors?.['confirmedValidator']) {
+        return null;
+      }
 
-        if (control!.value !== matchingControl!.value) {
-          const error = { confirmedValidator: 'Passwords do not match.' };
-          matchingControl!.setErrors(error);
-          return error;
-        } else {
-          matchingControl!.setErrors(null);
-          return null;
-        }
+      if (control!.value !== matchingControl!.value) {
+        const error = { confirmedValidator: 'Passwords do not match.' };
+        matchingControl!.setErrors(error);
+        return error;
+      } else {
+        matchingControl!.setErrors(null);
+        return null;
+      }
     }
   }
 
@@ -63,35 +63,38 @@ export class RegisterComponent {
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key])
     }
-    // myData.append('profileImage', this.imgSrc, this.imgSrc.name);
-// console.log(data.value)
-// this._AuthService.register(myData).subscribe((res) => {
-//   this._ToastrService.success(data.value.email, 'Welcome');
-//   localStorage.setItem('email' , data.value.email)
-//   this.openDialog()
-//   // console.log(res)
-  
-// },
-//   error => {
-//     this._ToastrService.error(error.error.message, 'Error in Registeration');
-//   })
-this.openDialog()
+    if(this.imgSrc == null){
+      // No Action
+    }else{
+      myData.append('profileImage', this.imgSrc, this.imgSrc.name);
+    }
+    
+    // console.log(data.value)
+    
+    this._AuthService.register(myData).subscribe((res) => {
+      this._ToastrService.success(data.value.email, 'Check yor Email to Verify');
+      localStorage.setItem('email', data.value.email)
+      this._Router.navigate(['/auth/verify'])
+      // console.log(res)
 
+    },
+      error => {
+        this._ToastrService.error(error.error.message, 'Error in Registeration');
+      })
   }
 
+  files: File[] = [];
 
-  openDialog(): void {
-    const dialogRef = this._MatDialog.open(VerifyComponent, {
-      data: {},
-      width: '40%',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        // this.onResetRequest(result)
-      }
-    });
+  onSelect(event: any) {
+    console.log(event.addedFiles[0].name);
+    this.imgSrc = event.addedFiles[0];
+    this.files.push(...event.addedFiles);
   }
+
+  onRemove(event: any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
 
 }
