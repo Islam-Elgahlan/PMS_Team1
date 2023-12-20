@@ -24,7 +24,9 @@ import { VerifyComponent } from './components/verify/verify.component';
     CommonModule,
     AuthRoutingModule,
      SharedModule,
-  ]
+  ],
+  
+
   
 })
 export class AuthModule { }
