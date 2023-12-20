@@ -14,7 +14,7 @@ import { ManagerComponent } from './components/manager/manager.component';
 @NgModule({
   declarations: [
 
-=======
+
     ManagerComponent,
     HomeComponent
   ],
