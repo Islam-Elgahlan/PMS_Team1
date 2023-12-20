@@ -3,25 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { ManagerRoutingModule } from './manager-routing.module';
 import { SharedModule } from '../shared/shared.module';
+
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-const routes: Routes = [
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'home',component:HomeComponent},
-  {path:'projects',loadChildren: () => import('./m-projects/m-projects.module').then(m => m.MProjectsModule)},
-  {path:'tasks',loadChildren: () => import('./m-tasks/m-tasks.module').then(m => m.MTasksModule)}
-];
+
+import { ManagerComponent } from './components/manager/manager.component';
+
 
 
 @NgModule({
   declarations: [
+
+=======
+    ManagerComponent,
     HomeComponent
   ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
     SharedModule,
-     RouterModule.forChild(routes)
   ]
 })
 export class ManagerModule { }
