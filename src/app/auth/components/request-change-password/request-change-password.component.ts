@@ -19,12 +19,12 @@ export class RequestChangePasswordComponent {
   });
 
   onSubmit(data: FormGroup) {
-    console.log(data);
+    console.log(data.value);
     this._AuthService.requestChangePassword(data.value).subscribe({
       next: (res) => {
         console.log(res);
         this._toastr.success('Please Check Your E-mail')
-       
+         localStorage.setItem('email',data.value.email)
       },
       error: (err) => {
         console.log(err);
@@ -32,6 +32,7 @@ export class RequestChangePasswordComponent {
       },
       complete: () => {
        this._router.navigate(['/auth/reset-password'])
+       
       },
     });
   }
