@@ -42,7 +42,7 @@ export class LoginComponent {
       complete: () => {
         this._AuthService.getProfile();
         this.route.navigate(['/dashboard']);
-        this._ToastrService.success('Hello world!', 'Toastr fun!');
+        this._ToastrService.success(localStorage.getItem('userName')!,'Hello ');
       },
     });
   }

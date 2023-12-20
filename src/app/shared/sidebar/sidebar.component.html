@@ -1,0 +1,19 @@
+<section class="overflow-auto">
+<div class="text-end mt-3">
+    <button class="toggle-btn" (click)="toggleSidebar()">
+        <i class="fa-solid fa-angle-left"></i>
+    </button>
+</div>
+   
+    <ng-container *ngFor="let item of menu">
+        <a [routerLink]="item.link"  routerLinkActive="active" *ngIf="item.isActive">
+            <div class="content">
+                <div class="content-li " [ngClass]="isOpened?'fs-5':'fs-2'">
+                   
+                    <span><i [class]="item.icon" style="color: #ffffff;"></i></span>
+                    <span  [ngClass]="isOpened?'d-inline':'d-none'">{{item.title}}</span>
+                </div>
+            </div>
+           </a>
+    </ng-container>
+</section>

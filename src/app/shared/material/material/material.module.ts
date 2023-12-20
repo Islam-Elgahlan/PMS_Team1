@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -29,7 +30,8 @@ const MaterialComponents = [
   MatSelectModule,
   MatSidenavModule,
   MatListModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatMenuModule
 
 ]
 

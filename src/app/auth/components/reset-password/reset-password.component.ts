@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,10 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ResetPasswordComponent {
   constructor(private _AuthService: AuthService,private _toastr:ToastrService,private _router:Router) {}
+   
   hide: boolean = true;
 
   resetForm = new FormGroup({
-    email: new FormControl(null,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+    email: new FormControl(localStorage.getItem('email'),[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
     seed: new FormControl(null,[Validators.required]),
     password: new FormControl(null,[Validators.required,Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)]),
     confirmPassword: new FormControl(null,[Validators.required]),
