@@ -88,17 +88,30 @@ body {
 button {
   font-size: 18px;
   border: none;
+  padding: 0.5rem 1rem;
 
   &.primary {
     border-radius: 96px;
     color: white;
-    width: 484px;
-    height: 56px;
+    // width: 484px;
+    // height: 56px;
     background-color: #ef9b28;
     margin-top: 5px;
 
     &:hover {
       opacity: 0.9;
+    }
+  } &.outline-secondary{
+    border-radius: 96px;
+    color: #0e382f;
+    border: 1px solid #000;
+    background-color: #fff;
+    margin-top: 5px;
+
+    &:hover {
+      opacity: 0.9;
+      background-color: #0e382f;
+      color: #fff;
     }
   }
 
@@ -115,4 +128,27 @@ a {
 }
 .text-orange {
   color: #ef9b28;
+}
+.page-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+
+  a{
+    text-decoration: none;
+    color: #0e382f;
+  }
+  h1{
+    color: #4f4f4f;
+  }
+}
+.form-card{
+  width: 80%;
+  margin: 2rem auto;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
 }

@@ -1,1 +1,42 @@
-<p>add-edit-project works!</p>
+<section>
+    <div class="page-header shadow-sm">
+        <div>
+            <a routerLink="../">
+                <i class="fa-solid fa-angle-left"></i>
+                <span>View All Projects</span>
+            </a>
+            <h1>Add New Projects</h1>
+        </div>
+
+
+    </div>
+    <div class="container">
+        <form [formGroup]="projectForm" (ngSubmit)="onSubmit(projectForm)">
+            <div class="form-card">
+                <div class="mt-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Title</mat-label>
+                        <input formControlName= "title" matInput placeholder="Placeholder">
+                        <mat-error *ngIf="projectForm.controls.title.hasError('required')">
+                             Title required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="my-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName = "description" matInput placeholder="Placeholder"></textarea>
+                        <mat-error *ngIf="projectForm.controls.description.hasError('required')">
+                            Description required
+                       </mat-error>
+                    </mat-form-field>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="outline-secondary w-25">Cancel</button>
+                    <button class="primary w-25">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
