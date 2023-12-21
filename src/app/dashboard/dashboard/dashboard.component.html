@@ -2,10 +2,10 @@
     <div class="container-fluid px-0">
         <app-navbar></app-navbar>
         <div class="row">
-            <div [class]="isOpen?'col-md-2':'col-md-1'">
+            <div class="px-0" [class]="isOpen?'col-md-2':'col-md-1'">
            <app-sidebar (isOpenedflag)="toggleBtn($event)"></app-sidebar>
             </div>
-            <div [class]="isOpen?'col-md-10':'col-md-11'">
+            <div class="px-0 bg-gray" [class]="isOpen?'col-md-10':'col-md-11'">
               <router-outlet></router-outlet>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ManagerService } from '../../services/manager.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,26 +10,76 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-edit-project.component.scss']
 })
 export class AddEditProjectComponent {
+
+  projectId: any;
+  isUpdatePage: boolean = false;
+  projectData: any;
+
   projectForm = new FormGroup({
     title: new FormControl(null, [Validators.required]),
     description: new FormControl(null, [Validators.required])
 
   })
 
-  constructor(private _ManagerService: ManagerService , private _Router:Router , private _ToastrService: ToastrService) { }
+  constructor(private _ManagerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
+    private _Router: Router, private _ToastrService: ToastrService) {
+    this.projectId = _ActivatedRoute.snapshot.paramMap.get('id')
+    if (this.projectId) {
+      this.isUpdatePage = true;
+      this.getProjectDataById(this.projectId);
+    } else {
+      this.isUpdatePage = false
+    }
+  }
 
   onSubmit(data: FormGroup) {
-    this._ManagerService.onAddProject(data.value).subscribe((res)=>{
-      console.log(res);
-      this._ToastrService.success('Project Added','Added ');
-      this._Router.navigate(['dashboard/manager/projects'])
+    if(this.projectId){
 
-      
-    },error =>{
-      this._ToastrService.error(error.message, 'Error!');
-    })
-    
+      // Edit
+      this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
+        this._ToastrService.success(res.message, 'Updated ');
+        this._Router.navigate(['dashboard/manager/projects'])
+      }, error => {
+        this._ToastrService.error(error.message, 'Error!');
+      })
+    }else{
 
+      // Add New
+      this._ManagerService.onAddProject(data.value).subscribe((res) => {
+        console.log(res);
+        this._ToastrService.success('Project Added', 'Added ');
+        this._Router.navigate(['dashboard/manager/projects'])
+  
+  
+      }, error => {
+        this._ToastrService.error(error.message, 'Error!');
+      })
+    }
+
+   
+
+
+  }
+
+  getProjectDataById(id: number) {
+    this._ManagerService.getProjectById(id).subscribe(
+      ({
+        next: (res) => {
+          this.projectData = res;
+        },
+        error: (err) => {
+          console.log(err)
+        },
+        complete: () => {
+          this.projectForm.patchValue({
+            title: this.projectData?.title,
+            description: this.projectData?.description,
+
+          })
+        }
+      })
+
+    )
 
   }
 }

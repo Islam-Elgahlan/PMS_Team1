@@ -13,4 +13,13 @@ export class ManagerService {
   onAddProject(data:IProject):Observable<any>{
     return this._HttpClient.post('Project' , data)
   }
+  getAllProjects():Observable<any>{
+    return this._HttpClient.get('Project')
+  }
+  getProjectById(id:number):Observable<any>{
+    return this._HttpClient.get(`Project/${id}`);
+  }
+  editProject( data:any , id: number ):Observable<any>{
+    return this._HttpClient.put(`Project/${id}` , data);
+  }
 }
