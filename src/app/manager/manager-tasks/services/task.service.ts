@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ITask } from 'src/app/models/project';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class TaskService {
 
   constructor(private _HttpClient:HttpClient ) { }
 
-  onAddTask(data:any):Observable<any>{
+  onAddTask(data:ITask):Observable<any>{
     return this._HttpClient.post('Task' , data)
   }
   getAllTasks():Observable<any>{

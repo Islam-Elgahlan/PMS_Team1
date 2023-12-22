@@ -4,8 +4,7 @@ export interface IProject {
     description: string,
     creationDate: string,
     modificationDate: string,
-    manager:IManager
-
+    manager: IManager
 }
 export interface IProjects {
     pageNumber: number,
@@ -27,4 +26,28 @@ export interface IManager {
     isActivated: boolean,
     creationDate: string,
     modificationDate: string
+}
+export interface ITask {
+    id: number,
+    title: string,
+    description: string,
+    status: string,
+    creationDate: string,
+    modificationDate: string,
+    project: IProject,
+    employee: IEmployee
+
+}
+export interface ITasks {
+    pageNumber: number,
+    pageSize: number,
+    data: ITask[],
+    totalNumberOfRecords: number,
+    totalNumberOfPages: number
+}
+
+export interface IEmployee {
+    id: number,
+    userName: string,
+    isActivated: string,
 }
