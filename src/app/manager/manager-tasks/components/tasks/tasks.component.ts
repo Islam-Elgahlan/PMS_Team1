@@ -17,7 +17,7 @@ export class TasksComponent {
     this._TaskService.getAllTasks().subscribe({
       next: (res) => {
         console.log(res);
-        this.tasksList = res;
+        this.tasksList = res.data;
       },
       error: (err) => {},
       complete: () => {},
