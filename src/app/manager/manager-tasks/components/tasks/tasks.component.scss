@@ -1,0 +1,32 @@
+.custom-table {
+  width: 100%;
+margin: 0p 5px;
+  thead {
+    font-size: 17px;
+    height: 60px;
+    background-color: rgba(49, 89, 81, 0.9);
+    color: white;
+  }
+}
+
+.status {
+  border-radius: 16px;
+  color: white;
+  padding: 8px 15px;
+  &.ToDo {
+    background-color: #e4e1f5;
+  }
+
+  &.InProgress {
+    background-color: rgba(239, 155, 40, 0.64);
+  }
+
+  &.Done {
+    background-color: #009247;
+  }
+}
+
+.search {
+  border-radius: 24px;
+  border: 0.7px solid rgba(38, 56, 90, 0.25);
+}

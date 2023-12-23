@@ -1,1 +1,70 @@
-<p>tasks works!</p>
+<section>
+  <div class="page-header shadow-lg">
+    <h1>Tasks</h1>
+    <button routerLink="" class="primary px-3 mx-2">
+      <span class="fa-solid fa-plus mx-2"></span>
+      <span class="px-2">Add New Task</span>
+    </button>
+  </div>
+  <div class="table-card container py-5">
+    <div class="input-group w-25  mb-3">
+        <span class="input-group-text search" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" class="form-control search" placeholder="Search fleets" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+    <table class="custom-table">
+      <thead class="text-capitalize">
+        <th class="px-2">Title</th>
+        <th>Status</th>
+        <th>User</th>
+        <th>Project</th>
+        <th>creation Date</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of tasksList; let isEven = even"
+          [class]="isEven ? '' : 'bg-secondary-subtle'"
+        >
+          <td class="px-2">{{ item.title }}</td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="{
+                ToDo: item.status == 'ToDo',
+                InProgress: item.status == 'InProgress',
+                Done: item.status == 'Done'
+              }"
+              >{{ item.status }}</span
+            >
+          </td>
+          <td>{{ item.employee.userName }}</td>
+          <td>{{ item.project.title }}</td>
+          <td>{{ item.creationDate | date : "dd-MM-yyyy , hh:mm a" }}</td>
+          <td class="text-center">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button [routerLink]="['edit', item.id]" mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>View</span>
+              </button>
+              <button [routerLink]="['edit', item.id]" mat-menu-item>
+                <mat-icon>edit_square</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
