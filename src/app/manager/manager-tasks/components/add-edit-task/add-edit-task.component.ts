@@ -85,8 +85,8 @@ ngOnInit(){
           this.taskForm.patchValue({
             title: this.taskData?.title,
             description: this.taskData?.description,
-            projectId: this.taskData?.projectId,
-            employeeId: this.taskData?.employeeId,
+            projectId: this.taskData?.project.id,
+            employeeId: this.taskData?.employee.id,
  
           })
         }
