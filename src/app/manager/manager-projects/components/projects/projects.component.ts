@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProjectsComponent {
 constructor(private _ManagerService: ManagerService,public dialog: MatDialog,private _toastr:ToastrService ){}
-
+view:boolean=true
   pageSize: number = 10;
   pageNumber: number | undefined = 1;
   tableResponse: IProjects | undefined;
