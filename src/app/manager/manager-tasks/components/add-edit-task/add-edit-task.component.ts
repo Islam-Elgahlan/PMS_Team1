@@ -41,6 +41,7 @@ export class AddEditTaskComponent {
 ngOnInit(){
   this.onGetAllUSers();
   this.onGetMyProjects();
+  
 }
 
   onSubmit(data: FormGroup) {
@@ -87,8 +88,9 @@ ngOnInit(){
             description: this.taskData?.description,
             projectId: this.taskData?.project.id,
             employeeId: this.taskData?.employee.id,
- 
           })
+          console.log(this.taskData?.project.id);
+
         }
       })
 

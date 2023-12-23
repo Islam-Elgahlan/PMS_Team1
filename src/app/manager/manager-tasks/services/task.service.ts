@@ -14,7 +14,7 @@ export class TaskService {
     return this._HttpClient.post('Task' , data)
   }
   getAllTasks():Observable<any>{
-    return this._HttpClient.get('Task/manager')
+    return this._HttpClient.get('Task/manager',{params:{pageSize:1000 , pageNumber:1}})
   }
   getTaskById(id:number):Observable<any>{
     return this._HttpClient.get(`Task/${id}`);
