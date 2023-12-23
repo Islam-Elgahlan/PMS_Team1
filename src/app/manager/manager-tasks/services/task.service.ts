@@ -22,4 +22,7 @@ export class TaskService {
   editTask( data:any , id: number ):Observable<any>{
     return this._HttpClient.put(`Task/${id}` , data);
   }
+  deleteTask(  id: number ):Observable<any>{
+    return this._HttpClient.delete(`Task/${id}`);
+  }
 }
