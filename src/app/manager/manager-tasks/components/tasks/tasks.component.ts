@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITask } from 'src/app/models/project';
+import { ITask, ITasks } from 'src/app/models/project';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -8,19 +8,22 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
-  tasksList: ITask[] = [];
-  constructor(private _TaskService: TaskService) {}
+  // tasksList: ITasks[] = [];
+  tableResponse: ITasks | undefined;
+  tableData: ITask[] | undefined = [];
+  constructor(private _TaskService: TaskService) { }
   ngOnInit() {
     this.openTasks();
   }
   openTasks() {
     this._TaskService.getAllTasks().subscribe({
       next: (res) => {
-        console.log(res);
-        this.tasksList = res.data;
+        console.log(res.data);
+        this.tableResponse = res;
+        this.tableData = this.tableResponse?.data;
       },
-      error: (err) => {},
-      complete: () => {},
+      error: (err) => { },
+      complete: () => { },
     });
   }
 }

@@ -45,6 +45,12 @@ export interface ITasks {
     totalNumberOfRecords: number,
     totalNumberOfPages: number
 }
+export interface IAddEditTask {
+    title: string,
+    description: string,
+    projectId: number,
+    employeeId: number
+}
 
 export interface IEmployee {
     id: number,

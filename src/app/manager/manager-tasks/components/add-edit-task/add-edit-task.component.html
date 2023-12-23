@@ -1,1 +1,70 @@
-<p>add-edit-task works!</p>
+<section>
+    <div class="page-header shadow-sm">
+        <div>
+            <a routerLink="/dashboard/manager/tasks">
+                <i class="fa-solid fa-angle-left"></i>
+                <span>View All Tasks</span>
+            </a>
+            <h1>Add New Task</h1>
+        </div>
+
+
+    </div>
+    <div class="container">
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm)">
+            <div class="form-card">
+                <div class="mt-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Title</mat-label>
+                        <input formControlName= "title" matInput placeholder="Placeholder">
+                        <mat-error *ngIf="taskForm.controls.title.hasError('required')">
+                             Title required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="my-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName = "description" matInput placeholder="Placeholder"></textarea>
+                        <mat-error *ngIf="taskForm.controls.description.hasError('required')">
+                            Description required
+                       </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Employee</mat-label>
+                            <mat-select formControlName = "employeeId">
+                                <mat-option *ngFor="let item of users" [value]="item.id">
+                                    {{item.userName}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="taskForm.controls.employeeId.hasError('required')">
+                                Employee required
+                           </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Project</mat-label>
+                            <mat-select formControlName = "projectId">
+                                <mat-option *ngFor="let item of projects" [value]="item.id">
+                                    {{item.title}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="taskForm.controls.projectId.hasError('required')">
+                                Project required
+                           </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="outline-secondary w-25">Cancel</button>
+                    <button class="primary w-25">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

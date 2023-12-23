@@ -7,13 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import {  RouterModule, Routes } from '@angular/router';
 
 
-const routes:Routes=[
-  {path:'',component:TasksComponent},
-  {path:'add',component:AddEditTaskComponent},
 
-
-
-]
 
 @NgModule({
   declarations: [
@@ -23,7 +17,6 @@ const routes:Routes=[
   imports: [
     CommonModule,
     ManagerTasksRoutingModule,
-    RouterModule.forChild(routes),
     SharedModule
   ]
 })
