@@ -73,12 +73,12 @@ isEmployee():boolean{
     isActive:this.isManager()
   },
     { icon:'fa-solid fa-layer-group',
-    title:'user projects',
-    link:'/dashboard/emolyee/projects',
+    title:'My projects',
+    link:'/dashboard/employee/projects',
     isActive:this.isEmployee()
   },
     { icon:'fa-solid fa-list-check',
-    title:'E-tasks',
+    title:'My tasks',
     link:'/dashboard/employee/tasks',
     isActive:this.isEmployee()
   },
