@@ -53,6 +53,12 @@ isEmployee():boolean{
     link:'/dashboard/manager/projects',
     isActive:this.isManager()
   },
+  
+    { icon:'fa-solid fa-users',
+    title:'users',
+    link:'/dashboard/manager/users',
+    isActive:this.isManager()
+  },
     { icon:'fa-solid fa-list-check',
     title:'tasks',
     link:'/dashboard/manager/tasks',

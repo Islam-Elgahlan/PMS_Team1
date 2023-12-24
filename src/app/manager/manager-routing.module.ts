@@ -10,6 +10,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'projects',loadChildren: () => import('./manager-projects/manager-projects.module').then(m => m.ManagerProjectsModule)},
   {path:'tasks',loadChildren: () => import('./manager-tasks/manager-tasks.module').then(m => m.ManagerTasksModule)}
+  ,{path:'users',loadChildren: () => import('./manager-users/manager-users.module').then(m => m.ManagerUsersModule)}
 
 ];
 
