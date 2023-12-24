@@ -11,7 +11,7 @@ export class TaskService {
   constructor(private _HttpClient:HttpClient ) { }
 
   onAddTask(data:IAddEditTask):Observable<any>{
-    return this._HttpClient.post('Task' , data)
+    return this._HttpClient.post('Task', data)
   }
   getAllTasks():Observable<any>{
     return this._HttpClient.get('Task/manager',{params:{pageSize:1000 , pageNumber:1}})
