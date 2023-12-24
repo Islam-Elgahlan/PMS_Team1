@@ -4,7 +4,7 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { MaterialModule } from './material/material/material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
@@ -22,7 +22,8 @@ import { DeleteItemComponent } from './delete-item/delete-item.component';
     ToastrModule,
     NgxDropzoneModule,
     ReactiveFormsModule,
+    FormsModule
   ],
-  exports: [MaterialModule, ToastrModule, NgxDropzoneModule,ReactiveFormsModule,NavbarComponent,SidebarComponent],
+  exports: [MaterialModule,FormsModule, ToastrModule, NgxDropzoneModule,ReactiveFormsModule,NavbarComponent,SidebarComponent],
 })
 export class SharedModule {}
