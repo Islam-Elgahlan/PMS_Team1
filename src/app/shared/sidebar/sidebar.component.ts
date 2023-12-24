@@ -74,12 +74,12 @@ isEmployee():boolean{
   },
     { icon:'fa-solid fa-layer-group',
     title:'user projects',
-    link:'/dashboard/emolyee',
+    link:'/dashboard/emolyee/projects',
     isActive:this.isEmployee()
   },
-    { icon:'fa-solid ffa-list-check',
+    { icon:'fa-solid fa-list-check',
     title:'E-tasks',
-    link:'/dashboard/employee/',
+    link:'/dashboard/employee/tasks',
     isActive:this.isEmployee()
   },
   

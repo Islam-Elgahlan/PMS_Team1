@@ -14,4 +14,8 @@ export class NavbarComponent {
     localStorage.removeItem('userToken');
     this._Router.navigate(['/auth'])
   }
+  userName = localStorage.getItem('userName')
+  userEmail = localStorage.getItem('userEmail')
+
+  
 }

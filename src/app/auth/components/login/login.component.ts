@@ -33,6 +33,7 @@ export class LoginComponent {
       next: (res) => {
         console.log(res);
         localStorage.setItem('userToken', res.token);
+
       },
       error: (err) => {
         console.log(err);
