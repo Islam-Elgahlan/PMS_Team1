@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 interface Imenu{
   title:string,
@@ -12,9 +13,16 @@ interface Imenu{
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  ngOnInit(){
+    if(this.isManager()){
+      this._Router.navigate(['/dashboard/manager/home'])
+    }else{
+      this._Router.navigate(['/dashboard/employee/home'])
+    }
+  }
 @Output() isOpenedflag = new EventEmitter<boolean>();
 isOpened:boolean=true;
-constructor(private _auth:AuthService){ }
+constructor(private _auth:AuthService , private _Router :Router){ }
 toggleSidebar(){
   this.isOpened=!this.isOpened;
 
