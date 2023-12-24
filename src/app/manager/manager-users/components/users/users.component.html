@@ -46,9 +46,9 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button  mat-menu-item>
+                <button (click)="openBlockDialog(item)"  mat-menu-item>
                     <mat-icon>block</mat-icon>
-                    <span>Block</span>
+                    <span>{{item.isActivated?'Block':'Unblock'}} </span>
                   </button>
                 
                 <button [routerLink]="" mat-menu-item>
