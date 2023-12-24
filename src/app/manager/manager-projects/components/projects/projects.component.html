@@ -29,7 +29,7 @@
                             <mat-icon>more_vert</mat-icon>
                           </button>
                           <mat-menu #menu="matMenu">
-                            <button [routerLink]="['edit',item.id]" mat-menu-item >
+                            <button [routerLink]="['edit',item.id,{params:view}]" mat-menu-item >
                               <mat-icon >visibility</mat-icon>
                               <span>View</span>
                             </button>

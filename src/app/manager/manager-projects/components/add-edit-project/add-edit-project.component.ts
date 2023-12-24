@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddEditProjectComponent {
 
   projectId: any;
+  viewParam:any
   isUpdatePage: boolean = false;
   projectData: any;
 
@@ -24,9 +25,20 @@ export class AddEditProjectComponent {
   constructor(private _ManagerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _ToastrService: ToastrService) {
     this.projectId = _ActivatedRoute.snapshot.paramMap.get('id')
+    this.viewParam=_ActivatedRoute.snapshot.paramMap.get('params')
+      console.log(this.viewParam);
+    
+    
+    
     if (this.projectId) {
-      this.isUpdatePage = true;
+      if (this.viewParam) {
+        console.log('hi');
+        this.viewProjectDataById(this.projectId)
+      } else {
+        this.isUpdatePage = true;
       this.getProjectDataById(this.projectId);
+      }
+      
     } else {
       this.isUpdatePage = false
     }
@@ -36,12 +48,16 @@ export class AddEditProjectComponent {
     if(this.projectId){
 
       // Edit
-      this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
-        this._ToastrService.success(res.message, 'Updated ');
-        this._Router.navigate(['dashboard/manager/projects'])
-      }, error => {
-        this._ToastrService.error(error.message, 'Error!');
-      })
+     
+        this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
+          this._ToastrService.success(res.message, 'Updated ');
+          this._Router.navigate(['dashboard/manager/projects'])
+        }, error => {
+          this._ToastrService.error(error.message, 'Error!');
+        })
+      
+    
+     
     }else{
 
       // Add New
@@ -81,5 +97,33 @@ export class AddEditProjectComponent {
 
     )
 
+  }
+  viewProjectDataById(id: number) {
+    this._ManagerService.getProjectById(id).subscribe(
+      ({
+        next: (res) => {
+          this.projectData = res;
+        },
+        error: (err) => {
+          console.log(err)
+        },
+        complete: () => {
+          this.projectForm.patchValue({
+            title: this.projectData?.title,
+            description: this.projectData?.description,
+
+          })
+          this.disableForm()
+        }
+      })
+
+    )
+
+  }
+
+  disableForm(): void {
+    this.projectForm.controls['title'].disable();
+    this.projectForm.controls['description'].disable();
+    
   }
 }
