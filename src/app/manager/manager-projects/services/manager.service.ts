@@ -13,8 +13,8 @@ export class ManagerService {
   onAddProject(data:IProject):Observable<any>{
     return this._HttpClient.post('Project' , data)
   }
-  getAllProjects():Observable<any>{
-    return this._HttpClient.get('Project/Manager',{params:{pageSize:1000 , pageNumber:1}})
+  getAllProjects(data:any):Observable<any>{
+    return this._HttpClient.get('Project/Manager',{params : data} )
   }
   getProjectById(id:number):Observable<any>{
     return this._HttpClient.get(`Project/${id}`);

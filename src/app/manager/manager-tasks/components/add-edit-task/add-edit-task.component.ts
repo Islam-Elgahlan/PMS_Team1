@@ -106,7 +106,7 @@ ngOnInit(){
     })
   }
   onGetMyProjects(){
-    this._ManagerService.getAllProjects().subscribe((res)=>{
+    this._ManagerService.getAllProjects({params : {pageSize:1000 ,pageNumber:1}}).subscribe((res)=>{
       // console.log(res.data);
       this.projects = res.data
       console.log(this.projects);
