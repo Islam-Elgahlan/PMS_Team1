@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { DeleteItemComponent } from './delete-item/delete-item.component';
     ToastrModule,
     NgxDropzoneModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
-  exports: [MaterialModule,FormsModule, ToastrModule, NgxDropzoneModule,ReactiveFormsModule,NavbarComponent,SidebarComponent],
+  exports: [MaterialModule,FormsModule, ToastrModule, NgxDropzoneModule,ReactiveFormsModule,NavbarComponent,SidebarComponent,MatDialogModule],
 })
 export class SharedModule {}

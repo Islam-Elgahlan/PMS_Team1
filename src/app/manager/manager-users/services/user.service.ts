@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private _HttpClient: HttpClient) {}
 
-  constructor(private _HttpClient:HttpClient ) { }
-
-
-  getAllUsers(params:any):Observable<any>{
-    return this._HttpClient.get('Users' , {params:params})
+  getAllUsers(params: any): Observable<any> {
+    return this._HttpClient.get('Users', { params: params });
+  }
+  onBlockOrUnblockUser(id: number): Observable<any> {
+    return this._HttpClient.put(`Users/${id}`,{})
   }
 }
