@@ -74,3 +74,4 @@ export interface IGroup {
     creationDate:string,
     modificationDate:string,
 }
+
