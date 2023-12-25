@@ -79,7 +79,7 @@ export class UsersComponent implements OnInit {
         this._ToastrService.error('Can’tBlock this User', 'Error');
       },
       complete: () => {
-        this._ToastrService.success('This user was blocked Successfully', 'Done');
+        this._ToastrService.success('This user was  blocked Successfully', 'Done');
         this.onGetAllUsers();
       },
     });

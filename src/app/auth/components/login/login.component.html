@@ -22,6 +22,9 @@
                 matInput
                 placeholder="Enter Your E-mail"
               />
+              <mat-error *ngIf="loginForm.controls.email.hasError('required')">
+                Email required
+            </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="w-100">
@@ -43,6 +46,9 @@
                   hide ? "visibility_off" : "visibility"
                 }}</mat-icon>
               </button>
+              <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+                Password required
+            </mat-error>
             </mat-form-field>
             
             <div
