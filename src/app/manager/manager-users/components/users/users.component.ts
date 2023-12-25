@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
     private _ToastrService: ToastrService
   ) {}
   searchValue: string = '';
-  pageSize: number = 200;
+  pageSize: number = 5;
   pageNumber: number = 1;
   tableRes: ITable | any;
   ngOnInit(): void {
@@ -52,8 +52,8 @@ export class UsersComponent implements OnInit {
   handlePageEvent(e: PageEvent) {
     console.log(e);
     this.pageSize = e.pageSize;
-    // this.pageNumber=this.tableRes.pageNumber;
-    this.pageNumber = e.pageIndex;
+      // this.pageNumber=this.tableRes.pageNumber;
+     this.pageNumber = e.pageIndex;
 
     this.onGetAllUsers();
   }
