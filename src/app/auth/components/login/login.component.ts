@@ -44,7 +44,7 @@ export class LoginComponent {
       complete: () => {
         this._AuthService.getProfile();
         this.route.navigate(['/dashboard']);
-        this.spinner.show()
+        this.spinner.hide()
         this._ToastrService.success(localStorage.getItem('userName')!,'Hello ');
       },
     });
