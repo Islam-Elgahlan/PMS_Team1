@@ -1,12 +1,27 @@
-<section class="m-3 ">
-    <h1 mat-dialog-title>Block|Unblock User</h1>
-<div mat-dialog-content>
-  <span class="text-center d-block  my-2 "><i class="fa-solid fa-ban text-danger fs-3 "></i></span>
-  <p>Are you sure you want to block <span class="text-danger ">{{ data.userName }} </span>?</p>
-  
-</div>
-<div mat-dialog-actions class="d-flex  justify-content-between ">
-    <button class="btn btn-danger bg-danger  text-white " mat-button [mat-dialog-close]="data.id" cdkFocusInitial>{{data.isActivated?'Block':'Unblock'}}</button>
-  <button class="btn btn-secondary " mat-button (click)="onNoClick()">Cancel</button>
-</div>
+<section>
+  <h1 mat-dialog-title class="w-100 bg-orange text-white">
+    Block | Unblock User
+  </h1>
+  <div mat-dialog-content>
+    <span class="text-center d-block my-3 fs-3"
+      ><i class="fa-solid fa-ban text-danger fs-3"></i
+    ></span>
+    <p class="m-3">
+      Are you sure you want to {{ data.isActivated ? "Block" : "Unblock" }}
+      <span class="text-danger">{{ data.userName }} </span>?
+    </p>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-between">
+    <button
+      class="btn bg-danger mb-2 text-white"
+      mat-button
+      [mat-dialog-close]="data.id"
+      cdkFocusInitial
+    >
+      {{ data.isActivated ? "Block" : "Unblock" }}
+    </button>
+    <button class="btn mb-2 btn-secondary" mat-button (click)="onNoClick()">
+      Cancel
+    </button>
+  </div>
 </section>

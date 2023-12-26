@@ -11,9 +11,12 @@ import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.comp
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
+  
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
+  pageSize: any;
+  pageNumber: any;
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog) { }
   ngOnInit() {
     this.openTasks();
@@ -61,5 +64,14 @@ export class TasksComponent {
           this._toastr.success('Project deleted Successfully')
         },
       })
+  }
+
+  
+  handlePageEvent(e:any){
+    
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex
+    console.log(e);
+    this.openTasks()
   }
 }
