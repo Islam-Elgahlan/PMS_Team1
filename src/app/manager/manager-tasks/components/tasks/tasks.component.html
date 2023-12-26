@@ -7,10 +7,18 @@
     </button>
   </div>
   <div class="table-card container py-5">
-    <div class="input-group w-25  mb-3">
-        <span class="input-group-text search" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" class="form-control search" placeholder="Search here" aria-label="Username" aria-describedby="basic-addon1">
-      </div>
+    <div class="input-group w-25 mb-3">
+      <span class="input-group-text search" id="basic-addon1"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></span>
+      <input
+        type="text"
+        class="form-control search"
+        placeholder="Search here"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
+    </div>
     <table class="custom-table">
       <thead class="text-capitalize">
         <th class="px-2 alone">Title</th>
@@ -18,7 +26,7 @@
         <th class="alone">User</th>
         <th class="alone">Project</th>
         <th class="alone">creation Date</th>
-        <th class="alone" ></th>
+        <th class="alone"></th>
       </thead>
       <tbody>
         <tr
@@ -28,7 +36,7 @@
           <td class="px-3">{{ item.title }}</td>
           <td>
             <span
-              class="status px-3 "
+              class="status px-3"
               [ngClass]="{
                 ToDo: item.status == 'ToDo',
                 InProgress: item.status == 'InProgress',
@@ -39,8 +47,10 @@
           </td>
           <td class="px-3">{{ item.employee.userName }}</td>
           <td class="px-3">{{ item.project.title }}</td>
-          <td class="px-3">{{ item.creationDate | date : "dd-MM-yyyy , hh:mm a" }}</td>
-          <td class="text-center px-3 ">
+          <td class="px-3">
+            {{ item.creationDate | date : "dd-MM-yyyy , hh:mm a" }}
+          </td>
+          <td class="text-center px-3">
             <button
               mat-icon-button
               [matMenuTriggerFor]="menu"
@@ -65,15 +75,17 @@
           </td>
         </tr>
       </tbody>
-    
     </table>
     <div>
-      <mat-paginator [length]="tableResponse?.totalNumberOfRecords" 
-      [pageSizeOptions]="[5,10, 50, 100]" [pageSize]="tableResponse?.pageSize"
-      [pageIndex]="tableResponse?.pageNumber" (page)="handlePageEvent($event)"
-       aria-label="Select page">
+      <mat-paginator
+        [length]="tableResponse?.totalNumberOfRecords"
+        [pageSizeOptions]="[5, 10, 50, 100]"
+        [pageSize]="tableResponse?.pageSize"
+        [pageIndex]="tableResponse?.pageNumber"
+        (page)="handlePageEvent($event)"
+        aria-label="Select page"
+      >
       </mat-paginator>
-      
-  </div>
+    </div>
   </div>
 </section>
