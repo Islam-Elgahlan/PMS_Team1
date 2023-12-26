@@ -4,7 +4,8 @@ export interface IProject {
     description: string,
     creationDate: string,
     modificationDate: string,
-    manager: IManager
+    manager: IManager,
+    totalNumberOfRecords:number
 }
 export interface IProjects {
     pageNumber: number,

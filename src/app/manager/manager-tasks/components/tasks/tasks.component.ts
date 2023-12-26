@@ -14,6 +14,8 @@ export class TasksComponent {
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
+  viewFlag:boolean=true;
+  
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog) { }
   ngOnInit() {
     this.openTasks();

@@ -16,6 +16,7 @@ export class AddEditTaskComponent {
   taskId: any;
   isUpdatePage: boolean = false;
   taskData: any;
+  taskView: any;
   projects: IProject [] = []
   users: IEmployee [] =[]
   taskForm = new FormGroup({
@@ -30,9 +31,15 @@ export class AddEditTaskComponent {
     private _Router: Router, private _ToastrService: ToastrService , private _HelperService:HelperService , 
     private _ManagerService:ManagerService) {
     this.taskId = _ActivatedRoute.snapshot.paramMap.get('id')
+    this.taskView = _ActivatedRoute.snapshot.paramMap.get('params')
+
     if (this.taskId) {
+      if (this.taskView) {
+        console.log('hi');
+        this.viewTaskDataById(this.taskId)
+      } else {
       this.isUpdatePage = true;
-      this.getTaskDataById(this.taskId);
+      this.getTaskDataById(this.taskId);}
     } else {
       this.isUpdatePage = false
     }
@@ -46,14 +53,16 @@ ngOnInit(){
 
   onSubmit(data: FormGroup) {
     if(this.taskId){
-
-      // Edit
-      this._TaskService.editTask(data.value , this.taskId).subscribe((res)=>{
-        this._ToastrService.success(res.message, 'Updated ');
-        this._Router.navigate(['dashboard/manager/tasks'])
-      }, error => {
-        this._ToastrService.error(error.message, 'Error!');
-      })
+      
+        this._TaskService.editTask(data.value , this.taskId).subscribe((res)=>{
+          this._ToastrService.success(res.message, 'Updated ');
+          this._Router.navigate(['dashboard/manager/tasks'])
+        }, error => {
+          this._ToastrService.error(error.message, 'Error!');
+        })
+      
+      
+     
     }else{
 
       // Add New
@@ -97,6 +106,39 @@ ngOnInit(){
     )
 
   }
+  viewTaskDataById(id: number) {
+    this._TaskService.getTaskById(id).subscribe(
+      ({
+        next: (res) => {
+          this.taskData = res;
+        },
+        error: (err) => {
+          console.log(err)
+        },
+        complete: () => {
+          this.taskForm.patchValue({
+            title: this.taskData?.title,
+            description: this.taskData?.description,
+            projectId: this.taskData?.project.id,
+            employeeId: this.taskData?.employee.id,
+          })
+          console.log(this.taskData?.project.id);
+          this.disableForm()
+        }
+      })
+      
+    )
+
+  }
+
+  disableForm(): void {
+    this.taskForm.controls['title'].disable();
+    this.taskForm.controls['description'].disable();
+    this.taskForm.controls['projectId'].disable();
+    this.taskForm.controls['employeeId'].disable();
+    
+  }
+
   onGetAllUSers(){
     this._HelperService.getAllUsers().subscribe((res)=>{
       // console.log(res.data);
