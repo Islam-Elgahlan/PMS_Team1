@@ -38,7 +38,7 @@ export class RegisterComponent {
         Validators.minLength(11),
         Validators.maxLength(13),
       ]),
-      // profileImage: new FormControl(null),
+      profileImage: new FormControl(null),
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
