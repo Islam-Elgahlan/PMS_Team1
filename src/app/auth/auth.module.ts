@@ -9,6 +9,7 @@ import { RequestChangePasswordComponent } from './components/request-change-pass
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { VerifyComponent } from './components/verify/verify.component';
     RequestChangePasswordComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
-    VerifyComponent
+    VerifyComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

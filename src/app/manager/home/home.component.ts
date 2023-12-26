@@ -7,10 +7,11 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-  constructor(private _helper:HelperService){}
+  
+  constructor(private _HelperService:HelperService){}
  taskCount:any;
   getTaskCount(){
-    this._helper.getTaskCount().subscribe({
+    this._HelperService.getTaskCount().subscribe({
       next:(res)=>{
         console.log(res);
         this.taskCount=res
@@ -43,9 +44,17 @@ export class HomeComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getTaskCount()
-   
+    this.onGetCurrentUser()
   }
 
-  userName=localStorage.getItem('userName')
+  userName :any;
   chart:any=[]
+  onGetCurrentUser() {
+    this._HelperService.getCurrentUser().subscribe((res) => {
+      // console.log(res)
+      this.userName = res.userName;
+      // console.log(this.currentUser.imagePath)
+    })
+  }
+
 }

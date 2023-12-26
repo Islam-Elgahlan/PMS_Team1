@@ -1,36 +1,38 @@
-<section class="shadow-sm mx-0">
-    <div class="container-fluid py-1">
-        <div class="row ">
-            <div class="col-md-2">
-                <img src="../../../assets/images/3 994372.svg" alt="" >
-            </div>
-            <div class="col-md-10 d-flex justify-content-end ">
-              <div class="d-flex align-items-center mt-2">
-                <div class="profile-img me-3">
-                     <img class="w-100 d-block" src="../../../assets/images/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg" alt=""> 
-                   </div>
-                   <div>
-                    <h3 class="mb-1">{{userName}}</h3>
-                    <span class="text-muted">{{userEmail}}</span>
-                   </div>
-                   <div class="">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                        <mat-icon>expand_more</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                       
-                        <button mat-menu-item >
-                          <mat-icon>person</mat-icon>
-                          <span>Profile</span>
-                        </button>
-                        <button (click)="logOut()" mat-menu-item>
-                          <mat-icon>logout</mat-icon>
-                          <span>Logout</span>
-                        </button>
-                      </mat-menu>
-                   </div>
-              </div>
-            </div>
+<section class="shadow-sm ">
+  <div class="container-fluid py-1">
+    <div class="row ">
+      <div class="col-md-2">
+        <img src="../../../assets/images/3 994372.svg" alt="">
+      </div>
+      <div class="col-md-10 d-flex justify-content-end ">
+        <div class="d-flex align-items-center mt-2" *ngIf="currentUser">
+          <div class="profile-img me-3">
+            <img *ngIf="currentUser.imagePath" src='http://upskilling-egypt.com:3003/{{currentUser.imagePath}}' >
+            <img *ngIf="!currentUser.imagePath" class="w-100 d-block"
+              src="../../../assets/images/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg" alt="">
+          </div>
+          <div>
+            <h3 class="mb-1">{{currentUser.userName}}</h3>
+            <span class="text-muted">{{currentUser.email}}</span>
+          </div>
+          <div class="">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+
+              <button routerLink="/auth/edit-profile" mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+              </button>
+              <button (click)="logOut()" mat-menu-item>
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>

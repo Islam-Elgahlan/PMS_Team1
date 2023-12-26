@@ -39,6 +39,9 @@ export class AuthService {
   onRegister(data:any):Observable<any>{
     return this._HttpClient.post('Users/Register' , data)
   }
+  onEditProfile(data:any):Observable<any> {
+    return this._HttpClient.put('Users' ,data)
+  }
 
   onVerify(data:any):Observable<any>{
     return this._HttpClient.put('Users/verify', data)
