@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-profile',
@@ -33,7 +34,8 @@ export class EditProfileComponent {
 
 
   constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
-    private _Router: Router, private _HelperService: HelperService) { }
+    private _Router: Router, private _HelperService: HelperService,
+    private spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.onGetCurrentUser()
   }
@@ -45,7 +47,7 @@ export class EditProfileComponent {
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key]);
     }
-    
+
     if (this.imgSrc == null) {
       // No Action
     } else {
@@ -53,23 +55,24 @@ export class EditProfileComponent {
     }
     // console.log(myData)
     // console.log(data.value)
-
+    this.spinner.show()
     this._AuthService.onEditProfile(myData).subscribe(
       (res) => {
-        this._ToastrService.success('Updated','Updated');
+        this._ToastrService.success('Updated', 'Updated');
         this._Router.navigate(['/dashboard']);
+        this.spinner.hide()
       },
       (error) => {
-        this._ToastrService.error(error.error.message,'Error in Update');
+        this._ToastrService.error(error.error.message, 'Error in Update');
       }
     );
   }
 
-  onGetCurrentUser(){
-    this._HelperService.getCurrentUser().subscribe((res)=>{
-      this.currentUser = res ;
+  onGetCurrentUser() {
+    this._HelperService.getCurrentUser().subscribe((res) => {
+      this.currentUser = res;
       // console.log(this.currentUser)
-      this.imgSrc = 'http://upskilling-egypt.com:3003/'+ this.currentUser.imagePath
+      this.imgSrc = 'http://upskilling-egypt.com:3003/' + this.currentUser.imagePath
       this.updateForm.patchValue({
         userName: this.currentUser?.userName,
         email: this.currentUser?.email,

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-verify',
@@ -13,7 +14,8 @@ export class VerifyComponent {
   constructor(
     private _AuthService: AuthService,
     private router: Router,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
   hide: any;
 
@@ -23,6 +25,7 @@ export class VerifyComponent {
   });
 
   onSubmit(data: FormGroup) {
+    this.spinner.show()
     this._AuthService.onVerify(data.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -34,6 +37,7 @@ export class VerifyComponent {
       complete: () => {
         this._ToastrService.success('Account verified successully', 'Success');
         this.router.navigate(['/auth/login']);
+        this.spinner.hide()
       },
     });
   }
