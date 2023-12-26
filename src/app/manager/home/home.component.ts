@@ -6,26 +6,20 @@ import { HelperService } from 'src/app/services/helper.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-<<<<<<< HEAD
 export class HomeComponent implements OnInit {
-  constructor(private _helper: HelperService) {}
   taskCount: any;
+  constructor(private _HelperService: HelperService) {}
+  ngOnInit(): void {
+    this.getTaskCount();
+    this.onGetCurrentUser();
+  }
   getTaskCount() {
-    this._helper.getTaskCount().subscribe({
-      next: (res) => {
-=======
-export class HomeComponent implements OnInit{
-  
-  constructor(private _HelperService:HelperService){}
- taskCount:any;
-  getTaskCount(){
     this._HelperService.getTaskCount().subscribe({
-      next:(res)=>{
->>>>>>> f4d0576d116508e4cff4e13077551b300cacf6c3
+      next: (res) => {
         console.log(res);
         this.taskCount = res;
       },
-      
+
       error: (err) => {},
       complete: () => {
         this.chart = new Chart('canvas', {
@@ -49,27 +43,14 @@ export class HomeComponent implements OnInit{
       },
     });
   }
-  ngOnInit(): void {
-<<<<<<< HEAD
-    this.getTaskCount();
-  }
 
-  userName = localStorage.getItem('userName');
+  userName: any;
   chart: any = [];
-=======
-    this.getTaskCount()
-    this.onGetCurrentUser()
-  }
-
-  userName :any;
-  chart:any=[]
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
       // console.log(res)
       this.userName = res.userName;
       // console.log(this.currentUser.imagePath)
-    })
+    });
   }
-
->>>>>>> f4d0576d116508e4cff4e13077551b300cacf6c3
 }

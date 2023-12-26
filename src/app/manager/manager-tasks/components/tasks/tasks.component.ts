@@ -16,14 +16,10 @@ export class TasksComponent {
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
-<<<<<<< HEAD
   pageSize: any;
   pageNumber: any;
-  constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog) { }
-=======
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     private spinner: NgxSpinnerService) { }
->>>>>>> 366e049e7a112c92f9ff1a10a68dd9110a31ab33
   ngOnInit() {
     this.openTasks();
   }
