@@ -1,1 +1,47 @@
+<<<<<<< HEAD
 
+=======
+<section>
+    <div class="page-header shadow-lg">
+        <h1>Projects</h1>
+        <button routerLink="add-edit-project" class="primary px-3">
+            <span class="fa-solid fa-plus mx-2"></span>
+            <span>Add New Project</span>
+        </button>
+    </div>
+    <div class="table-card container py-5">
+        <div>
+            <!-- search filter -->
+        </div>
+        <table class="custom-table ">
+            <thead class="text-capitalize">
+                <th class="px-2">Title</th>
+                <th>description</th>
+                <th>No Of Tasks</th>
+                <th>creation Date</th>
+                <th>modification Date</th>
+                <th></th>
+            </thead>
+            <tbody >
+                <tr *ngFor=" let item of tableData ;  let isEven = even"
+                [class]="isEven ? '' : 'bg-secondary-subtle'">
+                    <td >{{item.title}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.task.length}}</td>
+                    <td>{{item.creationDate | date:'dd-MM-yyyy , hh:mm a'}}</td>
+                    <td>{{item.modificationDate | date:'dd-MM-yyyy , hh:mm a'}}</td>
+                
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div>
+            <mat-paginator [length]="tableResponse?.totalNumberOfRecords" 
+            [pageSizeOptions]="[5,10, 50, 100]" [pageSize]="tableResponse?.pageSize"
+            [pageIndex]="tableResponse?.pageNumber" (page)="handlePageEvent($event)"
+             aria-label="Select page">
+            </mat-paginator>
+            
+        </div> -->
+    </div>
+</section>
+>>>>>>> f4d0576d116508e4cff4e13077551b300cacf6c3

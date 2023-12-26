@@ -6,10 +6,12 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path:'' , redirectTo:'login' , pathMatch:'full'},
   {path:'login' , component:LoginComponent},
+  {path:'edit-profile' , component:EditProfileComponent},
   {path:'register' , component:RegisterComponent},
   {path:'verify' , component:VerifyComponent},
   {path:'request-change' , component:RequestChangePasswordComponent},

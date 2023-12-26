@@ -75,3 +75,19 @@ export interface IGroup {
     modificationDate:string,
 }
 
+
+export interface IEProject {
+    id: number,
+    title: string,
+    description: string,
+    creationDate: string,
+    modificationDate: string,
+    task: ITask[]
+}
+export interface IEProjects {
+    pageNumber: number,
+    pageSize: number,
+    data: IEProject[],
+    totalNumberOfRecords: number,
+    totalNumberOfPages: number
+}

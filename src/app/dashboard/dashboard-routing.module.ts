@@ -7,6 +7,7 @@ import { ManagerModule } from '../manager/manager.module';
 import { EmployeeModule } from '../employee/employee.module';
 
 const routes: Routes = [
+  
   {path:'',component:DashboardComponent, children:[
     
     {
