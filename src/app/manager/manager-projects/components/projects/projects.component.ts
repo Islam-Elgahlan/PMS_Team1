@@ -4,6 +4,7 @@ import { IProject, IProjects } from 'src/app/models/project';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-projects',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService) { }
+  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService , 
+    private spinner: NgxSpinnerService) { }
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
@@ -25,10 +27,11 @@ export class ProjectsComponent {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
     }
-
+this.spinner.show()
     this._ManagerService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
+      this.spinner.hide()
     })
   }
 

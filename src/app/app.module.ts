@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GlobalInterceptor } from './interceptors/global.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton	: true ,
       timeOut: 2000
     }),
+    NgxSpinnerModule,
   ],
   providers: [
     {

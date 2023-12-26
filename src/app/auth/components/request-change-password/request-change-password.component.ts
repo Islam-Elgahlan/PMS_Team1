@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-request-change-password',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./request-change-password.component.scss']
 })
 export class RequestChangePasswordComponent {
-  constructor(private _AuthService: AuthService,private _toastr:ToastrService,private _router:Router) {}
+  constructor(private _AuthService: AuthService,private _toastr:ToastrService,private _router:Router ,
+    private spinner: NgxSpinnerService) {}
   hide: boolean = true;
 
   requestForm = new FormGroup({
@@ -20,6 +22,7 @@ export class RequestChangePasswordComponent {
 
   onSubmit(data: FormGroup) {
     console.log(data.value);
+    this.spinner.show()
     this._AuthService.requestChangePassword(data.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -32,6 +35,7 @@ export class RequestChangePasswordComponent {
       },
       complete: () => {
        this._router.navigate(['/auth/reset-password'])
+       this.spinner.hide()
        
       },
     });
