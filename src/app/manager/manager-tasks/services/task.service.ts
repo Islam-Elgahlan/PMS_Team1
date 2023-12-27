@@ -13,8 +13,8 @@ export class TaskService {
   onAddTask(data:IAddEditTask):Observable<any>{
     return this._HttpClient.post('Task', data)
   }
-  getAllTasks():Observable<any>{
-    return this._HttpClient.get('Task/manager',{params:{pageSize:1000 , pageNumber:1}})
+  getAllTasks(data:any):Observable<any>{
+    return this._HttpClient.get('Task/manager',{params:data})
   }
   getTaskById(id:number):Observable<any>{
     return this._HttpClient.get(`Task/${id}`);

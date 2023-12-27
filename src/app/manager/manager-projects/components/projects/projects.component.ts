@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProjectsComponent {
   constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService , 
    ) { }
+  pageIndex :number = 0
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
@@ -68,10 +69,9 @@ export class ProjectsComponent {
     })
   }
   handlePageEvent(e:any){
-    
-    this.pageSize = e.pageSize
-    this.pageNumber = e.pageIndex
     console.log(e);
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.onGetAllProjects()
   }
 }

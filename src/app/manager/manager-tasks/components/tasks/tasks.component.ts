@@ -18,9 +18,9 @@ export class TasksComponent {
   tableData: ITask[] | undefined = [];
 
   viewFlag:boolean=true
-
-  pageSize: any;
-  pageNumber: any;
+  pageIndex : number = 0
+  pageSize: number = 5;
+  pageNumber: number | undefined = 1;
 
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     ) { }
@@ -28,8 +28,11 @@ export class TasksComponent {
     this.openTasks();
   }
   openTasks() {
- 
-    this._TaskService.getAllTasks().subscribe({
+    let params = {
+      pageSize: this.pageSize,
+      pageNumber: this.pageNumber,
+    }
+    this._TaskService.getAllTasks(params).subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
@@ -77,9 +80,9 @@ export class TasksComponent {
   
   handlePageEvent(e:any){
     
-    this.pageSize = e.pageSize
-    this.pageNumber = e.pageIndex
     console.log(e);
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.openTasks()
   }
 }

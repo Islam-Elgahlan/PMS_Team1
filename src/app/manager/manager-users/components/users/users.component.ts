@@ -22,6 +22,7 @@ export class UsersComponent implements OnInit {
     
   ) {}
   searchValue: string = '';
+  pageIndex:number = 0
   pageSize: number = 5;
   pageNumber: number = 1;
   tableRes: ITable | any;
@@ -55,10 +56,8 @@ export class UsersComponent implements OnInit {
 
   handlePageEvent(e: PageEvent) {
     console.log(e);
-    this.pageSize = e.pageSize;
-      // this.pageNumber=this.tableRes.pageNumber;
-     this.pageNumber = e.pageIndex;
-
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.onGetAllUsers();
   }
   openBlockDialog(item: IEmployee) {
