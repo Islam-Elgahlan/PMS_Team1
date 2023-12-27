@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ManagerService } from '../../services/manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-add-edit-project',
@@ -25,7 +25,7 @@ export class AddEditProjectComponent {
 
   constructor(private _ManagerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _ToastrService: ToastrService , 
-    private spinner: NgxSpinnerService) {
+    ) {
     this.projectId = _ActivatedRoute.snapshot.paramMap.get('id')
     this.viewParam=_ActivatedRoute.snapshot.paramMap.get('params')
       console.log(this.viewParam);
@@ -50,11 +50,11 @@ export class AddEditProjectComponent {
     if(this.projectId){
 
       // Edit
-        this.spinner.show()
+     
         this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
           this._ToastrService.success(res.message, 'Updated ');
           this._Router.navigate(['dashboard/manager/projects'])
-          this.spinner.hide()
+          
         }, error => {
           this._ToastrService.error(error.message, 'Error!');
         })
@@ -64,12 +64,12 @@ export class AddEditProjectComponent {
     }else{
 
       // Add New
-      this.spinner.show()
+     
       this._ManagerService.onAddProject(data.value).subscribe((res) => {
         console.log(res);
         this._ToastrService.success('Project Added', 'Added ');
         this._Router.navigate(['dashboard/manager/projects'])
-        this.spinner.hide()
+      
   
       }, error => {
         this._ToastrService.error(error.message, 'Error!');

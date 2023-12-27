@@ -1,1 +1,59 @@
-<p>tasks works!</p>
+<section class="p-2 mt-5">
+    <div class="container">
+      <div cdkDropListGroup>
+        <div class="row ">
+            <div class="col-md-4">
+              
+                <div class="example-container">
+                    <h2>ToDo</h2>
+                
+                    <div
+                      cdkDropList
+                      [cdkDropListData]="todo"
+                      class="example-list"
+                      cdkDropListSortingDisabled
+                      (cdkDropListDropped)="drop($event)" id="ToDo">                      
+                        <div class="example-box" id={{item.id}} [cdkDragData]="item.id" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
+                      
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="example-container">
+                        <h2>InProgress</h2>
+                    
+                        <div
+                          cdkDropList
+                          [cdkDropListData]="inprogress"
+                          class="example-list"
+                          (cdkDropListDropped)="drop($event)" id="InProgress">
+                         
+                            <div class="example-box" id={{item.id}} [cdkDragData]="item.id" *ngFor="let item of inprogress" cdkDrag>{{item.title}}</div>
+                          
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="example-container">
+                        <h2>Done</h2>
+                    
+                        <div
+                          cdkDropList
+                          [cdkDropListData]="done"
+                          class="example-list"
+                          (cdkDropListDropped)="drop($event)" id="Done">
+                        
+                            <div class="example-box" id={{item.id}} [cdkDragData]="item.id" *ngFor="let item of done" cdkDrag>{{item.title}}</div>
+                          
+                        </div>
+                      </div>
+                  </div>
+            </div>
+          </div>
+            </div>
+           
+              
+        
+    
+
+</section>
