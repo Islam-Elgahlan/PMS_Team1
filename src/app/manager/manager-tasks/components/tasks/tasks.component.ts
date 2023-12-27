@@ -16,7 +16,7 @@ export class TasksComponent {
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
-
+  status: string = ''
   viewFlag:boolean=true
   pageIndex : number = 0
   pageSize: number = 5;
@@ -31,6 +31,7 @@ export class TasksComponent {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
+      status: this.status
     }
     this._TaskService.getAllTasks(params).subscribe({
       next: (res) => {
@@ -85,4 +86,5 @@ export class TasksComponent {
     this.pageNumber = e.pageIndex + 1
     this.openTasks()
   }
+ 
 }
