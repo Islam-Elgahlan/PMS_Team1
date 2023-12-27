@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-reset-password',
@@ -12,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ResetPasswordComponent {
   constructor(private _AuthService: AuthService, private _toastr: ToastrService, private _router: Router,
-    private spinner: NgxSpinnerService) { }
+    ) { }
 
   hide: boolean = true;
 
@@ -37,7 +37,7 @@ export class ResetPasswordComponent {
   }
   onSubmit(data: FormGroup) {
     console.log(data);
-    this.spinner.show()
+   
     this._AuthService.resetPassword(data.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -49,7 +49,7 @@ export class ResetPasswordComponent {
       },
       complete: () => {
         this._router.navigate(['/auth/login'])
-        this.spinner.hide()
+        
       },
     });
   }

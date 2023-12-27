@@ -15,8 +15,8 @@
             <div class="form-card">
                 <div class="mt-4">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Title</mat-label>
-                        <input formControlName= "title" matInput placeholder="Placeholder">
+                        <mat-label class="text-dark">Title</mat-label>
+                        <input formControlName= "title" class="text-danger" matInput placeholder="Placeholder">
                         <mat-error *ngIf="taskForm.controls.title.hasError('required')">
                              Title required
                         </mat-error>
@@ -24,8 +24,8 @@
                 </div>
                 <div class="my-3">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Description</mat-label>
-                        <textarea formControlName = "description" matInput placeholder="Placeholder"></textarea>
+                        <mat-label class="text-dark">Description</mat-label>
+                        <textarea formControlName = "description" class="text-danger" matInput placeholder="Placeholder"></textarea>
                         <mat-error *ngIf="taskForm.controls.description.hasError('required')">
                             Description required
                        </mat-error>
@@ -34,8 +34,8 @@
                 <div class="row">
                     <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Employee</mat-label>
-                            <mat-select formControlName = "employeeId">
+                            <mat-label class="text-dark">Employee</mat-label>
+                            <mat-select formControlName = "employeeId" class="text-danger">
                                 <mat-option *ngFor="let item of users" [value]="item.id">
                                     {{item.userName}}
                                 </mat-option>
@@ -47,8 +47,8 @@
                     </div>
                     <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Project</mat-label>
-                            <mat-select formControlName = "projectId">
+                            <mat-label class="text-dark">Project</mat-label>
+                            <mat-select formControlName = "projectId" class="text-danger">
                                 <mat-option *ngFor="let item of projects" [value]="item.id">
                                     {{item.title}}
                                 </mat-option>
@@ -61,8 +61,8 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="outline-secondary w-25">Cancel</button>
-                    <button class="primary w-25">Save</button>
+                    <button type="button" class="outline-secondary w-25" routerLink="/dashboard/manager/tasks">Cancel</button>
+                    <button class="primary w-25" *ngIf="!viewTask">Save</button>
                 </div>
             </div>
         </form>

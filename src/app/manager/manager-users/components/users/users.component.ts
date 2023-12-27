@@ -6,7 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUserComponent } from './block-user/block-user.component';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-users',
@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
     private _user: UserService,
     public dialog: MatDialog,
     private _ToastrService: ToastrService,
-    private spinner: NgxSpinnerService
+    
   ) {}
   searchValue: string = '';
   pageSize: number = 5;
@@ -35,13 +35,13 @@ export class UsersComponent implements OnInit {
       pageNumber: this.pageNumber,
       userName: this.searchValue,
     };
-    this.spinner.show()
+   
     this._user.getAllUsers(params).subscribe({
       next: (res) => {
         console.log(res);
         this.tableRes = res;
         this.tableData = res.data;
-        this.spinner.hide()
+    
       },
       error: (err) => {},
       complete: () => {},

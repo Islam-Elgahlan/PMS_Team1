@@ -1,81 +1,87 @@
 <section>
-    <div class="page-header shadow-lg">
-      <h1>Users</h1>
-      <button routerLink="add-edit-task" class="primary px-3 mx-2">
-        <span class="fa-solid fa-plus mx-2"></span>
-        <span class="px-2">Add New User</span>
-      </button>
-    </div>
-    <div class="table-card container py-5">
-      <div class="input-group w-25  mb-3">
-          <span class="input-group-text search" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-          <input type="text" class="form-control search" placeholder="Search " (keyup)="search()"
-           [(ngModel)]="searchValue" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-      <table class="custom-table">
-        <thead class="text-capitalize">
-          <th class="px-2">Name</th>
-          <th>Status</th>
-          <th>PhoneNumber</th>
-          <th>Email</th>
-          <th>creation Date</th>
-          <th></th>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let item of tableData; let isEven = even"
-            [class]="isEven ? '' : 'bg-secondary-subtle'"
-          >
-            <td class="px-2">{{ item.userName }}</td>
-            <td>
-              <span
-                class="status"
-                [class]="
-                item.isActivated?'active':'notActive'
-                ">{{item.isActivated?'Active':'notActive'}}</span>
-            </td>
-            <td>{{ item.phoneNumber }}</td>
-            <td>{{ item.email }}</td>
-            <td>{{ item.creationDate | date : "dd-MM-yyyy , hh:mm a" }}</td>
-            <td class="text-center">
-              <button
-                mat-icon-button
-                [matMenuTriggerFor]="menu"
-                aria-label="Example icon-button with a menu"
-              >
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button (click)="openBlockDialog(item)"  mat-menu-item>
-                    <mat-icon>block</mat-icon>
-                    <span>{{item.isActivated?'Block':'Unblock'}} </span>
-                  </button>
-                
-                <button [routerLink]="" mat-menu-item>
-                  <mat-icon>visibility</mat-icon>
-                  <span>View</span>
-                </button>
-               
-              </mat-menu>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-     
-    </div>
-    <div class="bg-info">
-      <mat-paginator #paginator
-         class="demo-paginator"
-         (page)="handlePageEvent($event)"
-         [length]="tableRes.totalNumberOfRecords"
-         [pageSize]="tableRes.pageSize"
-         
-        
-         [pageSizeOptions]=" [5,10,15,20,40,100]"
-      
-         [pageIndex]="tableRes.pageNumber"
-         aria-label="Select page">
-</mat-paginator>
+
+  <div class="page-header shadow-lg">
+    <h1>Users</h1>
+    <button routerLink="add-edit-task" class="primary px-3 mx-2">
+      <span class="fa-solid fa-plus mx-2"></span>
+      <span class="px-2">Add New User</span>
+    </button>
   </div>
-  </section>
-  
+  <div class="table-card container py-5">
+    <div class="input-group w-25 mb-3">
+      <span class="input-group-text search" id="basic-addon1"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></span>
+      <input
+        type="text"
+        class="form-control search"
+        placeholder="Search "
+        (keyup)="search()"
+        [(ngModel)]="searchValue"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+    <table class="custom-table">
+      <thead class="text-capitalize">
+        <th class="px-2 alone">Name</th>
+        <th class="alone">Status</th>
+        <th class="alone">PhoneNumber</th>
+        <th class="alone">Email</th>
+        <th class="alone">creation Date</th>
+        <th class="alone"></th>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of tableData; let isEven = even"
+          [class]="isEven ? '' : 'bg-secondary-subtle'"
+        >
+          <td class="px-2">{{ item.userName }}</td>
+          <td>
+            <span
+              class="status"
+              [class]="item.isActivated ? 'active' : 'notActive'"
+              >{{ item.isActivated ? "Active" : "notActive" }}</span
+            >
+          </td>
+          <td>{{ item.phoneNumber }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.creationDate | date : "dd-MM-yyyy , hh:mm a" }}</td>
+          <td class="text-center">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button (click)="openBlockDialog(item)" mat-menu-item>
+                <mat-icon>block</mat-icon>
+                <span>{{ item.isActivated ? "Block" : "Unblock" }} </span>
+              </button>
+
+              <button [routerLink]="" mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>View</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bg-info">
+    <mat-paginator
+      #paginator
+      class="demo-paginator"
+      (page)="handlePageEvent($event)"
+      [length]="tableRes.totalNumberOfRecords"
+      [pageSize]="tableRes.pageSize"
+      [pageSizeOptions]="[5, 10, 15, 20, 40, 100]"
+      [pageIndex]="tableRes.pageNumber"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</section>

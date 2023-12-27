@@ -15,8 +15,8 @@
             <div class="form-card">
                 <div class="mt-4">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Title</mat-label>
-                        <input formControlName= "title" matInput placeholder="Placeholder">
+                        <mat-label class="text-dark">Title</mat-label>
+                        <input formControlName= "title" class="text-danger" matInput placeholder="Placeholder">
                         <mat-error *ngIf="projectForm.controls.title.hasError('required')">
                              Title required
                         </mat-error>
@@ -24,8 +24,8 @@
                 </div>
                 <div class="my-3">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Description</mat-label>
-                        <textarea formControlName = "description" matInput placeholder="Placeholder"></textarea>
+                        <mat-label class="text-dark">Description</mat-label>
+                        <textarea class="text-danger" formControlName = "description" matInput placeholder="Placeholder"></textarea>
                         <mat-error *ngIf="projectForm.controls.description.hasError('required')">
                             Description required
                        </mat-error>

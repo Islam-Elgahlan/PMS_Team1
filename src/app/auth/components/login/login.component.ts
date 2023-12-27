@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,8 @@ export class LoginComponent {
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
     private route: Router,
-    private spinner: NgxSpinnerService
+    
+    
   ) {}
   hide: boolean = true;
 
@@ -29,7 +30,7 @@ export class LoginComponent {
 
   onSubmit(data: FormGroup) {
     console.log(data);
-    this.spinner.show()
+   
     this._AuthService.onLogin(data.value).subscribe({
       next: (res) => {
         console.log(res);
@@ -44,7 +45,7 @@ export class LoginComponent {
       complete: () => {
         this._AuthService.getProfile();
         this.route.navigate(['/dashboard']);
-        this.spinner.hide()
+
         this._ToastrService.success(localStorage.getItem('userName')!,'Hello ');
       },
     });
