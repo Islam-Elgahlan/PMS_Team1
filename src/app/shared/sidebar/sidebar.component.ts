@@ -46,38 +46,38 @@ isEmployee():boolean{
 }
 
   menu:Imenu[]=[
-    { icon:'fa-solid fa-house',
+    { icon:'fa-solid fa-house fs-4',
     title:'home',
     link:'/dashboard/manager/home',
     isActive: this.isManager()
   },
-    { icon:'fa-solid fa-house',
+    { icon:'fa-solid fa-house fs-4',
     title:'home',
     link:'/dashboard/employee/home',
     isActive: this.isEmployee()
   },
-    { icon:'fa-solid fa-layer-group',
+    { icon:'fa-solid fa-layer-group fs-4',
     title:'projects',
     link:'/dashboard/manager/projects',
     isActive:this.isManager()
   },
   
-    { icon:'fa-solid fa-users',
+    { icon:'fa-solid fa-users fs-4',
     title:'users',
     link:'/dashboard/manager/users',
     isActive:this.isManager()
   },
-    { icon:'fa-solid fa-list-check',
+    { icon:'fa-solid fa-list-check fs-4',
     title:'tasks',
     link:'/dashboard/manager/tasks',
     isActive:this.isManager()
   },
-    { icon:'fa-solid fa-layer-group',
+    { icon:'fa-solid fa-layer-group fs-4',
     title:'My projects',
     link:'/dashboard/employee/projects',
     isActive:this.isEmployee()
   },
-    { icon:'fa-solid fa-list-check',
+    { icon:'fa-solid fa-list-check fs-4',
     title:'My tasks',
     link:'/dashboard/employee/tasks',
     isActive:this.isEmployee()

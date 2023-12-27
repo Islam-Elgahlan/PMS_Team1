@@ -34,6 +34,7 @@ $PMS-theme: mat.define-light-theme((color: (primary: $PMS-primary,
 html,
 body {
   height: 100%;
+  overflow-x: hidden
 }
 
 body {
