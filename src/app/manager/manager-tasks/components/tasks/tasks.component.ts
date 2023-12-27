@@ -4,7 +4,7 @@ import { TaskService } from '../../services/task.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-tasks',
@@ -17,18 +17,18 @@ export class TasksComponent {
   tableData: ITask[] | undefined = [];
   viewFlag:boolean=true
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
-    private spinner: NgxSpinnerService) { }
+    ) { }
   ngOnInit() {
     this.openTasks();
   }
   openTasks() {
-    this.spinner.show()
+ 
     this._TaskService.getAllTasks().subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
-        this.spinner.hide()
+     
       },
       error: (err) => { },
       complete: () => { },

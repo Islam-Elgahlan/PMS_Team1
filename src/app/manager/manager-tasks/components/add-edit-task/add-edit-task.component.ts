@@ -6,7 +6,7 @@ import { TaskService } from '../../services/task.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { ManagerService } from 'src/app/manager/manager-projects/services/manager.service';
 import { IEmployee, IProject } from 'src/app/models/project';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-add-edit-task',
@@ -32,7 +32,7 @@ export class AddEditTaskComponent {
   constructor(private _TaskService: TaskService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _ToastrService: ToastrService , private _HelperService:HelperService , 
     private _ManagerService:ManagerService,
-    private spinner: NgxSpinnerService) {
+    ) {
     this.taskId = _ActivatedRoute.snapshot.paramMap.get('id')
     this.viewTask = _ActivatedRoute.snapshot.paramMap.get('params')
     if (this.taskId) {
@@ -57,11 +57,11 @@ ngOnInit(){
     if(this.taskId){
 
       // Edit
-      this.spinner.show()
+     
       this._TaskService.editTask(data.value , this.taskId).subscribe((res)=>{
         this._ToastrService.success(res.message, 'Updated ');
         this._Router.navigate(['dashboard/manager/tasks'])
-        this.spinner.hide()
+      
       }, error => {
         this._ToastrService.error(error.message, 'Error!');
       })

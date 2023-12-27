@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EmployeeService } from 'src/app/employee/services/employee.service';
 import { IEProject, IEProjects, IProject, IProjects } from 'src/app/models/project';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-projects',
@@ -12,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ProjectsComponent {
 
-  constructor(private _EmployeeService: EmployeeService, private _toastr: ToastrService ,private spinner: NgxSpinnerService) { }
+  constructor(private _EmployeeService: EmployeeService, private _toastr: ToastrService ) { }
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
@@ -27,11 +27,11 @@ export class ProjectsComponent {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
     }
-    this.spinner.show();
+    
     this._EmployeeService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
-      this.spinner.hide();
+    
       // console.log(this.tableResponse?.data);
       
        
