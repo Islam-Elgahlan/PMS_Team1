@@ -12,9 +12,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService , 
-   ) { }
-  pageIndex :number = 0
+  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
+  ) { }
+  pageIndex: number = 0
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
@@ -32,7 +32,9 @@ export class ProjectsComponent {
     this._ManagerService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
-      
+      localStorage.setItem('projectsCount', '')
+    }, (error) => {
+
     })
   }
 
@@ -68,7 +70,7 @@ export class ProjectsComponent {
       },
     })
   }
-  handlePageEvent(e:any){
+  handlePageEvent(e: any) {
     console.log(e);
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
