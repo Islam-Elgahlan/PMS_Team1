@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-tasks',
@@ -12,70 +13,75 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
-  
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
-  pageSize: any;
-  pageNumber: any;
-  constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
-    private spinner: NgxSpinnerService) { }
+  pageSize: number | undefined;
+  pageNumber: number | undefined;
+  constructor(
+    private _TaskService: TaskService,
+    private _toastr: ToastrService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService
+  ) {}
   ngOnInit() {
     this.openTasks();
   }
   openTasks() {
-    this.spinner.show()
+    this.spinner.show();
     this._TaskService.getAllTasks().subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
-        this.spinner.hide()
+        this.spinner.hide();
       },
-      error: (err) => { },
-      complete: () => { },
+      error: (err) => {},
+      complete: () => {
+        
+      },
     });
   }
 
-  openAddDialog(data:any): void {
+  openAddDialog(data: any): void {
     console.log(data);
-    
+
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-     data:data, 
-      width:'30%'
+      data: data,
+      width: '30%',
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       console.log(result);
-      if(result){
-        this.deleteItem(result.id)
-        this.openTasks()
+      if (result) {
+        this.deleteItem(result.id);
+        this.openTasks();
       }
-      
     });
-
-   
   }
-  deleteItem(id:number){
-      this._TaskService.deleteTask(id).subscribe({
-        next:(res)=>{
-          console.log(res);
-          
-        },error:(err)=>{
-    this._toastr.error('Try Again')
-        },complete:()=> {
-          this._toastr.success('Project deleted Successfully')
-        },
-      })
+  deleteItem(id: number) {
+    this._TaskService.deleteTask(id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        this._toastr.error('Try Again');
+      },
+      complete: () => {
+        this._toastr.success('Project deleted Successfully');
+      },
+    });
   }
 
-  
-  handlePageEvent(e:any){
-    
-    this.pageSize = e.pageSize
-    this.pageNumber = e.pageIndex
-    console.log(e);
-    this.openTasks()
+  handlePageEvent(e: PageEvent) {
+    this.pageNumber = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.openTasks();
+
+    // this.pageEvent = e;
+    // this.length = e.length;
+    // this.pageSize = e.pageSize;
+    // this.pageIndex = e.pageIndex;
   }
 }
