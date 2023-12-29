@@ -4,7 +4,7 @@ import { TaskService } from '../../services/task.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-tasks',
@@ -16,21 +16,29 @@ export class TasksComponent {
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
-  pageSize: any;
-  pageNumber: any;
+  status: string = ''
+  viewFlag:boolean=true
+  pageIndex : number = 0
+  pageSize: number = 5;
+  pageNumber: number | undefined = 1;
+
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
-    private spinner: NgxSpinnerService) { }
+    ) { }
   ngOnInit() {
     this.openTasks();
   }
   openTasks() {
-    this.spinner.show()
-    this._TaskService.getAllTasks().subscribe({
+    let params = {
+      pageSize: this.pageSize,
+      pageNumber: this.pageNumber,
+      status: this.status
+    }
+    this._TaskService.getAllTasks(params).subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
-        this.spinner.hide()
+     
       },
       error: (err) => { },
       complete: () => { },
@@ -73,9 +81,10 @@ export class TasksComponent {
   
   handlePageEvent(e:any){
     
-    this.pageSize = e.pageSize
-    this.pageNumber = e.pageIndex
     console.log(e);
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.openTasks()
   }
+ 
 }

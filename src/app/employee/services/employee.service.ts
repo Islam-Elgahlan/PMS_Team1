@@ -12,5 +12,11 @@ export class EmployeeService {
   getAllProjects(data:any):Observable<any>{
     return this._HttpClient.get('Project/Employee',{params : data} )
   }
+  getMyAssignedTasks(data:any):Observable<any>{
+    return this._HttpClient.get('Task',{params : data} )
+  }
+  changeTaskStatus(id:number,status:string):Observable<any>{
+    return this._HttpClient.put(`Task/${id}/change-status`,{"status":status} )
+  }
 
 }

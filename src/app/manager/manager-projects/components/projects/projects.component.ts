@@ -4,7 +4,7 @@ import { IProject, IProjects } from 'src/app/models/project';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-projects',
@@ -12,8 +12,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService , 
-    private spinner: NgxSpinnerService) { }
+  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
+  ) { }
+  pageIndex: number = 0
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
@@ -27,11 +28,13 @@ export class ProjectsComponent {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
     }
-this.spinner.show()
+
     this._ManagerService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
-      this.spinner.hide()
+      localStorage.setItem('projectsCount', '')
+    }, (error) => {
+
     })
   }
 
@@ -67,11 +70,10 @@ this.spinner.show()
       },
     })
   }
-  handlePageEvent(e:any){
-    
-    this.pageSize = e.pageSize
-    this.pageNumber = e.pageIndex
+  handlePageEvent(e: any) {
     console.log(e);
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.onGetAllProjects()
   }
 }

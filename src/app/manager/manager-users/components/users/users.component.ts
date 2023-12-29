@@ -6,7 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUserComponent } from './block-user/block-user.component';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-users',
@@ -19,9 +19,10 @@ export class UsersComponent implements OnInit {
     private _user: UserService,
     public dialog: MatDialog,
     private _ToastrService: ToastrService,
-    private spinner: NgxSpinnerService
+    
   ) {}
   searchValue: string = '';
+  pageIndex:number = 0
   pageSize: number = 5;
   pageNumber: number = 1;
   tableRes: ITable | any;
@@ -35,13 +36,13 @@ export class UsersComponent implements OnInit {
       pageNumber: this.pageNumber,
       userName: this.searchValue,
     };
-    this.spinner.show()
+   
     this._user.getAllUsers(params).subscribe({
       next: (res) => {
         console.log(res);
         this.tableRes = res;
         this.tableData = res.data;
-        this.spinner.hide()
+    
       },
       error: (err) => {},
       complete: () => {},
@@ -55,10 +56,8 @@ export class UsersComponent implements OnInit {
 
   handlePageEvent(e: PageEvent) {
     console.log(e);
-    this.pageSize = e.pageSize;
-      // this.pageNumber=this.tableRes.pageNumber;
-     this.pageNumber = e.pageIndex;
-
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.onGetAllUsers();
   }
   openBlockDialog(item: IEmployee) {
@@ -77,13 +76,18 @@ export class UsersComponent implements OnInit {
   onBlockUser(id: number) {
     this._user.onBlockOrUnblockUser(id).subscribe({
       next: (res) => {
+        this._ToastrService.success(
+          res.isActivated
+            ? 'This user was Unblocked Successfully'
+            : 'This user was blocked Successfully',
+          'Done'
+        );
         console.log(res);
       },
       error: (err) => {
         this._ToastrService.error('Can’tBlock this User', 'Error');
       },
       complete: () => {
-        this._ToastrService.success('This user was  blocked Successfully', 'Done');
         this.onGetAllUsers();
       },
     });

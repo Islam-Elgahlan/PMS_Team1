@@ -25,7 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     NgxDropzoneModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [MaterialModule,FormsModule, ToastrModule, NgxDropzoneModule,ReactiveFormsModule,NavbarComponent,SidebarComponent,MatDialogModule],
 })
