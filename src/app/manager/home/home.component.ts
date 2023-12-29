@@ -8,6 +8,9 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class HomeComponent implements OnInit {
   taskCount: any;
+  projectsCount = localStorage.getItem('projectsCount');
+  tasksCount = localStorage.getItem('tasksCount');
+
   constructor(private _HelperService: HelperService) {}
   ngOnInit(): void {
     this.getTaskCount();

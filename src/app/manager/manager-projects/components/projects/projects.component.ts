@@ -37,11 +37,15 @@ export class ProjectsComponent {
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
         this.spinner.hide();
-      },error:(err)=>{
-
-      }, complete:()=>{
-        localStorage.setItem('projectsCount','')
-      }
+        localStorage.setItem(
+          'projectsCount',
+          JSON.stringify(res.totalNumberOfRecords)
+        );
+      },
+      error: (err) => {},
+      complete: () => {
+       
+      },
     });
   }
 

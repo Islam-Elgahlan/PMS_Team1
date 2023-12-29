@@ -35,10 +35,15 @@ export class TasksComponent {
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
         this.spinner.hide();
+        localStorage.setItem(
+          'tasksCount',
+          JSON.stringify(res.totalNumberOfRecords)
+        );
       },
       error: (err) => {},
       complete: () => {
         
+
       },
     });
   }
