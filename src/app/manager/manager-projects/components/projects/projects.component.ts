@@ -4,6 +4,7 @@ import { IProject, IProjects } from 'src/app/models/project';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, debounceTime } from 'rxjs';
 
 
 @Component({
@@ -19,12 +20,18 @@ export class ProjectsComponent {
   tableResponse: IProjects | undefined;
   tableData: IProject[] | undefined = [];
   searchValue: string = '';
+  private subject=new Subject<any>;
   
   constructor(private _managerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
   ) { }
 
   ngOnInit() {
     this.onGetAllProjects()
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.onGetAllProjects()
+      },
+    })
   }
 
   onGetAllProjects() {
@@ -83,7 +90,6 @@ export class ProjectsComponent {
   }
   search(term: string) {
     this.searchValue = term
-    // console.log(term)
-    this.onGetAllProjects()
+    this.subject.next(this.searchValue)
   }
 }
