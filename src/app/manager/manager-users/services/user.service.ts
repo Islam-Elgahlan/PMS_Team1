@@ -9,7 +9,7 @@ export class UserService {
   constructor(private _HttpClient: HttpClient) {}
 
   getAllUsers(params: any): Observable<any> {
-    return this._HttpClient.get('Users', { params: params });
+    return this._HttpClient.get('Users/Manager', { params: params });
   }
   getUser(id:number): Observable<any> {
     return this._HttpClient.get(`Users/${id}`);
