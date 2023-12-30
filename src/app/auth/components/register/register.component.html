@@ -90,6 +90,10 @@
                                     <mat-error *ngIf="registerForm.controls.password.hasError('required')">
                                         Password required
                                     </mat-error>
+                                    <mat-error
+                                        *ngIf="registerForm.controls.password.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
@@ -105,6 +109,10 @@
                                     </button>
                                     <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
                                         Confirmed Password required
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="registerForm.controls.confirmPassword.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
                                     </mat-error>
                                     <mat-error
                                         *ngIf="registerForm.controls.confirmPassword.hasError('confirmedValidator')">

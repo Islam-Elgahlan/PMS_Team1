@@ -15,6 +15,7 @@ export class ChangePasswordComponent {
   hide1: boolean = true;
   hide2: boolean = true;
 
+
   constructor(private _AuthService: AuthService,private _toastrService:ToastrService,
     public dialogRef: MatDialogRef<ChangePasswordComponent>) {}
   changeForm = new FormGroup({
@@ -34,6 +35,13 @@ export class ChangePasswordComponent {
 
     }
   }
+
+
+  
+  changeForm = new FormGroup({
+    
+    
+
 
   onSubmit(data: FormGroup) {
     console.log(data);

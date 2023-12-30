@@ -35,7 +35,8 @@ export class EditProfileComponent {
         Validators.maxLength(13),
       ]),
       profileImage: new FormControl(null),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)]),
     },
   );
 

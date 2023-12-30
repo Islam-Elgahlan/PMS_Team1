@@ -10,6 +10,7 @@
                     <div class="title mb-2">
                         <span>Welcome to PMS</span>
                         <h3 class="fs-3">Edit Your Profile</h3>
+                        <a class="text-end d-block text-decoration-none text-white" routerLink="/dashboard"> <<< Back</a>
                     </div>
                     <form [formGroup]="updateForm" (ngSubmit)="onEdit(updateForm)">
                         <div class="row">
@@ -92,8 +93,8 @@
                                         Confirmed Password required
                                     </mat-error>
                                     <mat-error
-                                        *ngIf="updateForm.controls.confirmPassword.hasError('confirmedValidator')">
-                                        Password not Matched
+                                        *ngIf="updateForm.controls.confirmPassword.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
                                     </mat-error>
                                 </mat-form-field>
                             </div>

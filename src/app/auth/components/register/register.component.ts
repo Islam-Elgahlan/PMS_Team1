@@ -45,8 +45,10 @@ export class RegisterComponent {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
       ]),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)])
     },
     {
       validators: this.matchValidator('password', 'confirmPassword'),
