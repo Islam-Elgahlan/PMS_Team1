@@ -38,7 +38,6 @@ export class ChangePasswordComponent {
 
 
   
-  changeForm = new FormGroup({
     
     
 
