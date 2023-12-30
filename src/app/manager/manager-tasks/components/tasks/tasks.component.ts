@@ -4,6 +4,7 @@ import { TaskService } from '../../services/task.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
+import { Subject, debounceTime } from 'rxjs';
 
 
 @Component({
@@ -22,11 +23,17 @@ export class TasksComponent {
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
   searchValue: string = '';
+  private subject=new Subject<any>;
 
   constructor(private _taskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     ) { }
   ngOnInit() {
     this.openTasks();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.openTasks()
+      },
+    })
   }
   openTasks() {
     let params = {
@@ -90,8 +97,7 @@ export class TasksComponent {
   }
   search(term: string) {
     this.searchValue = term
-    // console.log(term)
-    this.openTasks();
+    this.subject.next(this.searchValue)
   }
  
 }
