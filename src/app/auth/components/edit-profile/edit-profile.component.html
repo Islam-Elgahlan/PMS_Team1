@@ -92,8 +92,8 @@
                                         Confirmed Password required
                                     </mat-error>
                                     <mat-error
-                                        *ngIf="updateForm.controls.confirmPassword.hasError('confirmedValidator')">
-                                        Password not Matched
+                                        *ngIf="updateForm.controls.confirmPassword.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
                                     </mat-error>
                                 </mat-form-field>
                             </div>

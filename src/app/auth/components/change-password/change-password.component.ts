@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,11 +11,26 @@ export class ChangePasswordComponent {
   constructor(private _AuthService: AuthService) {}
   hide: boolean = true;
 
+
+  
   changeForm = new FormGroup({
     
-    oldPassword: new FormControl(null),
-    newPassword: new FormControl(null),
-    confirmNewPassword: new FormControl(null),
+    
+    oldPassword: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
+    ] ),
+    newPassword: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
+    ]),
+    confirmNewPassword: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
+    ]),
   });
 
   onSubmit(data: FormGroup) {
