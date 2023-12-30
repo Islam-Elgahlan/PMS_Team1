@@ -19,6 +19,10 @@ import { VerifyComponent } from '../verify/verify.component';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  hide: boolean = true;
+  confirmHide: boolean = true;
+  imgSrc: any;
+  
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
@@ -26,10 +30,7 @@ export class RegisterComponent {
     public _MatDialog: MatDialog,
     
   ) {}
-  hide: boolean = true;
-  confirmHide: boolean = true;
-
-  imgSrc: any;
+  
   registerForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  hide: boolean = true;
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
@@ -18,7 +19,7 @@ export class LoginComponent {
     
     
   ) {}
-  hide: boolean = true;
+ 
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),

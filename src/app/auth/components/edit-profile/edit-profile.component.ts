@@ -16,6 +16,14 @@ export class EditProfileComponent {
   confirmHide: boolean = true;
   currentUser: any;
   imgSrc: any;
+ 
+  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
+    private _Router: Router, private _HelperService: HelperService,
+    private spinner: NgxSpinnerService) { }
+  ngOnInit() {
+    this.onGetCurrentUser()
+  }
+
   updateForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),
@@ -30,15 +38,6 @@ export class EditProfileComponent {
       confirmPassword: new FormControl(null, [Validators.required]),
     },
   );
-
-
-
-  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
-    private _Router: Router, private _HelperService: HelperService,
-    private spinner: NgxSpinnerService) { }
-  ngOnInit() {
-    this.onGetCurrentUser()
-  }
 
 
   onEdit(data: FormGroup) {

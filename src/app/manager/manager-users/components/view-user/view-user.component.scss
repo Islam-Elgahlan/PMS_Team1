@@ -1,0 +1,25 @@
+section{
+    .row{
+        
+        .user-image{
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                border: #13473ca6 solid 1px;
+            }
+        }
+        .user-content{
+           
+            h2{
+                color: #EF9B28;
+                span{
+                    color: #13473c;
+                    font-size: 20px;
+                    margin-right: 2px;
+                }
+            }
+        }
+    }
+  
+}

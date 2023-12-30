@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ChangePasswordComponent } from 'src/app/auth/components/change-password/change-password.component';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -8,7 +10,8 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private _Router: Router, private _HelperService: HelperService) {
+  constructor(private _Router: Router, private _HelperService: HelperService,
+    public dialog: MatDialog) {
 
   }
   ngOnInit() {
@@ -27,4 +30,19 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      data: {},
+      width:'40%'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      // if(result){
+      //   this.onRequestRestPassword(result)
+      // }
+      
+    });
+  }
 }

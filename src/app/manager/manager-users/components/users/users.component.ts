@@ -6,6 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUserComponent } from './block-user/block-user.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, debounceTime } from 'rxjs';
 
 
 @Component({
@@ -15,19 +16,26 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UsersComponent implements OnInit {
   tableData: IEmployee[] = [];
+  searchValue: string = '';
+  pageIndex:number = 0
+  pageSize: number = 5;
+  pageNumber: number = 1;
+  tableRes: ITable | any;
+  private subject=new Subject<any>;
   constructor(
     private _user: UserService,
     public dialog: MatDialog,
     private _ToastrService: ToastrService,
     
   ) {}
-  searchValue: string = '';
-  pageIndex:number = 0
-  pageSize: number = 5;
-  pageNumber: number = 1;
-  tableRes: ITable | any;
+  
   ngOnInit(): void {
     this.onGetAllUsers();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.onGetAllUsers()
+      },
+    })
   }
 
   onGetAllUsers() {
@@ -51,7 +59,7 @@ export class UsersComponent implements OnInit {
 
   search() {
     console.log(this.searchValue);
-    this.onGetAllUsers();
+    this.subject.next(this.searchValue)
   }
 
   handlePageEvent(e: PageEvent) {

@@ -12,24 +12,27 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
-  ) { }
   pageIndex: number = 0
   view: boolean = true
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
   tableResponse: IProjects | undefined;
   tableData: IProject[] | undefined = [];
+  
+  constructor(private _managerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
+  ) { }
+ 
   ngOnInit() {
     this.onGetAllProjects()
   }
+
   onGetAllProjects() {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
     }
 
-    this._ManagerService.getAllProjects(params).subscribe((res) => {
+    this._managerService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
       localStorage.setItem('projectsCount', '')
@@ -59,7 +62,7 @@ export class ProjectsComponent {
 
   }
   deleteItem(id: number) {
-    this._ManagerService.deleteProject(id).subscribe({
+    this._managerService.deleteProject(id).subscribe({
       next: (res) => {
         console.log(res);
 

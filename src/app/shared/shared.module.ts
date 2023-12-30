@@ -9,13 +9,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

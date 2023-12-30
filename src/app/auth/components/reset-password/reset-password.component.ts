@@ -11,10 +11,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
+  hide: boolean = true;
   constructor(private _AuthService: AuthService, private _toastr: ToastrService, private _router: Router,
     ) { }
-
-  hide: boolean = true;
 
   resetForm = new FormGroup({
     email: new FormControl(localStorage.getItem('email'), [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),

@@ -11,6 +11,9 @@ export class UserService {
   getAllUsers(params: any): Observable<any> {
     return this._HttpClient.get('Users', { params: params });
   }
+  getUser(id:number): Observable<any> {
+    return this._HttpClient.get(`Users/${id}`);
+  }
   onBlockOrUnblockUser(id: number): Observable<any> {
     return this._HttpClient.put(`Users/${id}`,{})
   }
