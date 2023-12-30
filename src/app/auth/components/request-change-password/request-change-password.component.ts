@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./request-change-password.component.scss']
 })
 export class RequestChangePasswordComponent {
+  hide: boolean = true;
   constructor(private _AuthService: AuthService,private _toastr:ToastrService,private _router:Router ,
   ) {}
-  hide: boolean = true;
+ 
 
   requestForm = new FormGroup({
     email: new FormControl(null,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),

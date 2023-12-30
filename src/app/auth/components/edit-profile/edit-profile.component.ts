@@ -16,6 +16,14 @@ export class EditProfileComponent {
   confirmHide: boolean = true;
   currentUser: any;
   imgSrc: any;
+ 
+  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
+    private _Router: Router, private _HelperService: HelperService,
+    private spinner: NgxSpinnerService) { }
+  ngOnInit() {
+    this.onGetCurrentUser()
+  }
+
   updateForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),
@@ -31,15 +39,6 @@ export class EditProfileComponent {
         Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)]),
     },
   );
-
-
-
-  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
-    private _Router: Router, private _HelperService: HelperService,
-    private spinner: NgxSpinnerService) { }
-  ngOnInit() {
-    this.onGetCurrentUser()
-  }
 
 
   onEdit(data: FormGroup) {

@@ -5,12 +5,14 @@ import { ManagerUsersRoutingModule } from './manager-users-routing.module';
 import { UsersComponent } from './components/users/users.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BlockUserComponent } from './components/users/block-user/block-user.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    BlockUserComponent
+    BlockUserComponent,
+    ViewUserComponent
   ],
   imports: [
     CommonModule,

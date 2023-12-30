@@ -23,7 +23,7 @@ export class TasksComponent {
   pageNumber: number | undefined = 1;
   searchValue: string = '';
 
-  constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
+  constructor(private _taskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     ) { }
   ngOnInit() {
     this.openTasks();
@@ -35,7 +35,7 @@ export class TasksComponent {
       status: this.status,
       title : this.searchValue
     }
-    this._TaskService.getAllTasks(params).subscribe({
+    this._taskService.getAllTasks(params).subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
@@ -68,7 +68,7 @@ export class TasksComponent {
    
   }
   deleteItem(id:number){
-      this._TaskService.deleteTask(id).subscribe({
+      this._taskService.deleteTask(id).subscribe({
         next:(res)=>{
           console.log(res);
           

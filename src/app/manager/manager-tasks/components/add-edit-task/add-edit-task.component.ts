@@ -21,16 +21,9 @@ export class AddEditTaskComponent {
   users: IEmployee [] =[]
   viewTask:any;
 
-  taskForm = new FormGroup({
-    title: new FormControl(null, [Validators.required]),
-    description: new FormControl(null, [Validators.required]),
-    projectId: new FormControl(null, [Validators.required]),
-    employeeId: new FormControl(null, [Validators.required])
 
-  })
-
-  constructor(private _TaskService: TaskService, private _ActivatedRoute: ActivatedRoute,
-    private _Router: Router, private _ToastrService: ToastrService , private _HelperService:HelperService , 
+  constructor(private _taskService: TaskService, private _ActivatedRoute: ActivatedRoute,
+    private _Router: Router, private _toastrService: ToastrService , private _HelperService:HelperService , 
     private _ManagerService:ManagerService,
     ) {
     this.taskId = _ActivatedRoute.snapshot.paramMap.get('id')
@@ -52,40 +45,43 @@ ngOnInit(){
   this.onGetMyProjects();
   
 }
+taskForm = new FormGroup({
+  title: new FormControl(null, [Validators.required]),
+  description: new FormControl(null, [Validators.required]),
+  projectId: new FormControl(null, [Validators.required]),
+  employeeId: new FormControl(null, [Validators.required])
+
+})
 
   onSubmit(data: FormGroup) {
     if(this.taskId){
 
       // Edit
      
-      this._TaskService.editTask(data.value , this.taskId).subscribe((res)=>{
-        this._ToastrService.success(res.message, 'Updated ');
+      this._taskService.editTask(data.value , this.taskId).subscribe((res)=>{
+        this._toastrService.success(res.message, 'Updated ');
         this._Router.navigate(['dashboard/manager/tasks'])
       
       }, error => {
-        this._ToastrService.error(error.message, 'Error!');
+        this._toastrService.error(error.message, 'Error!');
       })
     }else{
 
       // Add New
-      this._TaskService.onAddTask(data.value).subscribe((res) => {
+      this._taskService.onAddTask(data.value).subscribe((res) => {
         console.log(res);
-        this._ToastrService.success('Task Added', 'Added ');
+        this._toastrService.success('Task Added', 'Added ');
         this._Router.navigate(['dashboard/manager/tasks'])
   
   
       }, error => {
-        this._ToastrService.error(error.error.message, 'Error!');
+        this._toastrService.error(error.error.message, 'Error!');
       })
     }
-
-   
-
-
   }
 
   viewTaskDataById(id: number) {
-    this._TaskService.getTaskById(id).subscribe(
+    this._taskService.getTaskById(id).subscribe(
       ({
         next: (res) => {
           this.taskData = res;
@@ -116,7 +112,7 @@ this.disableForm()
     
   }
   getTaskDataById(id: number) {
-    this._TaskService.getTaskById(id).subscribe(
+    this._taskService.getTaskById(id).subscribe(
       ({
         next: (res) => {
           this.taskData = res;

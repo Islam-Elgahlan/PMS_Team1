@@ -13,18 +13,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent {
-
-  constructor(
-    private _EmployeeService: EmployeeService,
-    private _toastr: ToastrService,
-    private spinner: NgxSpinnerService
-  ) {}
   view: boolean = true;
   pageIndex:number = 0
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
   tableResponse: IEProjects | undefined;
   tableData: IEProject[] | undefined = [];
+  
+  constructor(
+    private _EmployeeService: EmployeeService,
+    private _toastr: ToastrService,
+    private spinner: NgxSpinnerService
+  ) {}
+  
   ngOnInit() {
     this.onGetAllProjects();
   }
