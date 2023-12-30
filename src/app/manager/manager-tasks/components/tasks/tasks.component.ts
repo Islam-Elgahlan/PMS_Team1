@@ -21,6 +21,7 @@ export class TasksComponent {
   pageIndex : number = 0
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
+  searchValue: string = '';
 
   constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     ) { }
@@ -31,7 +32,8 @@ export class TasksComponent {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
-      status: this.status
+      status: this.status,
+      title : this.searchValue
     }
     this._TaskService.getAllTasks(params).subscribe({
       next: (res) => {
@@ -85,6 +87,11 @@ export class TasksComponent {
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.openTasks()
+  }
+  search(term: string) {
+    this.searchValue = term
+    // console.log(term)
+    this.openTasks();
   }
  
 }

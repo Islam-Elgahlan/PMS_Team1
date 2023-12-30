@@ -20,6 +20,7 @@ export class ProjectsComponent {
   pageNumber: number | undefined = 1;
   tableResponse: IProjects | undefined;
   tableData: IProject[] | undefined = [];
+  searchValue: string = '';
   ngOnInit() {
     this.onGetAllProjects()
   }
@@ -27,6 +28,7 @@ export class ProjectsComponent {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
+      title : this.searchValue
     }
 
     this._ManagerService.getAllProjects(params).subscribe((res) => {
@@ -74,6 +76,11 @@ export class ProjectsComponent {
     console.log(e);
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
+    this.onGetAllProjects()
+  }
+  search(term: string) {
+    this.searchValue = term
+    // console.log(term)
     this.onGetAllProjects()
   }
 }
