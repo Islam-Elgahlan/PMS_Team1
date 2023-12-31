@@ -10,6 +10,7 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  role :string |undefined = localStorage.getItem('role')?.toLowerCase();
   constructor(private _Router: Router, private _HelperService: HelperService,
     public dialog: MatDialog) {
 

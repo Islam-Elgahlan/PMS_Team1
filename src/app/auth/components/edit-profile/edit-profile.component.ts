@@ -16,7 +16,8 @@ export class EditProfileComponent {
   confirmHide: boolean = true;
   currentUser: any;
   imgSrc: any;
- 
+  role :string |undefined = localStorage.getItem('role')?.toLowerCase();
+
   constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
     private _Router: Router, private _HelperService: HelperService,
     private spinner: NgxSpinnerService) { }
@@ -57,8 +58,8 @@ export class EditProfileComponent {
     this.spinner.show()
     this._AuthService.onEditProfile(myData).subscribe(
       (res) => {
-        this._ToastrService.success('Updated', 'Updated');
-        this._Router.navigate(['/dashboard']);
+        this._ToastrService.success('Your Profile Updated', 'Updated');
+        this._Router.navigate([`/dashboard/${this.role}/home`]);
         this.spinner.hide()
       },
       (error) => {

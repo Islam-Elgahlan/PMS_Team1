@@ -10,7 +10,6 @@
                     <div class="title mb-2">
                         <span>Welcome to PMS</span>
                         <h3 class="fs-3">Edit Your Profile</h3>
-                        <a class="text-end d-block text-decoration-none text-white" routerLink="/dashboard"> <<< Back</a>
                     </div>
                     <form [formGroup]="updateForm" (ngSubmit)="onEdit(updateForm)">
                         <div class="row">
@@ -101,8 +100,9 @@
                         </div>
                         
                         
-                        <div class="text-center mt-3">
-                            <button class="primary text-center w-50 py-3">Save</button>
+                        <div class="text-center mt-3 d-flex justify-content-between">
+                            <button type="button" class="outline-secondary w-25" routerLink="/dashboard/{{role}}/home">Cancel</button>
+                            <button class="primary text-center w-25 py-3">Save</button>
                         </div>
                     </form>
                 </div>
