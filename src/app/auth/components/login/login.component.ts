@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
   hide: boolean = true;
+  hideRequiredMarker:boolean=true;
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
@@ -22,7 +23,7 @@ export class LoginComponent {
  
 
   loginForm = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl(null, [
       Validators.required,
       Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
@@ -30,16 +31,15 @@ export class LoginComponent {
   });
 
   onSubmit(data: FormGroup) {
-    console.log(data);
-   
+    
     this._AuthService.onLogin(data.value).subscribe({
       next: (res) => {
-        console.log(res);
+      
         localStorage.setItem('userToken', res.token);
 
       },
       error: (err) => {
-        console.log(err);
+       
         this._ToastrService.error(err.error.message, 'Error!');
 
       },

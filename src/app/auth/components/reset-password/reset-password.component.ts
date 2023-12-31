@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ResetPasswordComponent {
   hide: boolean = true;
+  hideRequiredMarker:boolean=true;
   constructor(private _AuthService: AuthService, private _toastr: ToastrService, private _router: Router,
     ) { }
 
@@ -35,15 +36,13 @@ export class ResetPasswordComponent {
     }
   }
   onSubmit(data: FormGroup) {
-    console.log(data);
-   
+  
     this._AuthService.resetPassword(data.value).subscribe({
       next: (res) => {
-        console.log(res);
 
       },
       error: (err) => {
-        console.log(err);
+      
         this._toastr.error(err.error.message)
       },
       complete: () => {

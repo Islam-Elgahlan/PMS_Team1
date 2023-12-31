@@ -53,8 +53,7 @@ export class EditProfileComponent {
     } else {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
-    // console.log(myData)
-    // console.log(data.value)
+   
     this.spinner.show()
     this._AuthService.onEditProfile(myData).subscribe(
       (res) => {
@@ -71,7 +70,7 @@ export class EditProfileComponent {
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
       this.currentUser = res;
-      // console.log(this.currentUser)
+   
       this.imgSrc = 'http://upskilling-egypt.com:3003/' + this.currentUser.imagePath
       this.updateForm.patchValue({
         userName: this.currentUser?.userName,
@@ -87,13 +86,11 @@ export class EditProfileComponent {
   files: File[] = [];
 
   onSelect(event: any) {
-    console.log(event.addedFiles[0].name);
     this.imgSrc = event.addedFiles[0];
     this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 }
