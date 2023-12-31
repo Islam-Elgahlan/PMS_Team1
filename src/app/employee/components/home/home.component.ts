@@ -15,9 +15,9 @@ export class HomeComponent {
 
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
-      // console.log(res)
+      
       this.userName = res.userName;
-      // console.log(this.currentUser.imagePath)
+  
     })
   }
 }

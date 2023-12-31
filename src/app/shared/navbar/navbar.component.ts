@@ -19,14 +19,17 @@ export class NavbarComponent implements OnInit {
   }
   logOut() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
     this._Router.navigate(['/auth'])
   }
   currentUser :any;
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
-      // console.log(res)
+      
       this.currentUser = res;
-      console.log(this.currentUser.imagePath)
+     
     })
   }
 
@@ -37,8 +40,7 @@ export class NavbarComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+     
       // if(result){
       //   this.onRequestRestPassword(result)
       // }

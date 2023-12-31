@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
    
     this._user.getAllUsers(params).subscribe({
       next: (res) => {
-        console.log(res);
+       
         this.tableRes = res;
         this.tableData = res.data;
     
@@ -90,7 +90,7 @@ export class UsersComponent implements OnInit {
             : 'This user was blocked Successfully',
           'Done'
         );
-        console.log(res);
+      
       },
       error: (err) => {
         this._ToastrService.error('Can’tBlock this User', 'Error');

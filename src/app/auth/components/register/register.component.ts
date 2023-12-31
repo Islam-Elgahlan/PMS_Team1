@@ -22,7 +22,7 @@ export class RegisterComponent {
   hide: boolean = true;
   confirmHide: boolean = true;
   imgSrc: any;
-  
+  hideRequiredMarker:boolean=true;
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
@@ -93,7 +93,6 @@ export class RegisterComponent {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
 
-    // console.log(data.value)
 
     this._AuthService.onRegister(myData).subscribe(
       (res) => {
@@ -117,13 +116,13 @@ export class RegisterComponent {
   files: File[] = [];
 
   onSelect(event: any) {
-    console.log(event.addedFiles[0].name);
+    
     this.imgSrc = event.addedFiles[0];
     this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
-    console.log(event);
+    
     this.files.splice(this.files.indexOf(event), 1);
   }
 }

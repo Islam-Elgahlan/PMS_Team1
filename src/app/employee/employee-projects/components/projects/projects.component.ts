@@ -40,13 +40,12 @@ export class ProjectsComponent {
     this._EmployeeService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
-    
-      // console.log(this.tableResponse?.data);
+   
     });
   }
 
   handlePageEvent(e: any) {
-    console.log(e);
+   
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.onGetAllProjects();

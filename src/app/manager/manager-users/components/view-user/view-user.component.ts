@@ -22,7 +22,7 @@ constructor(private _userService:UserService,private _activateRoute:ActivatedRou
 getuserById(id:number){
   this._userService.getUser(id).subscribe({
     next:(res)=>{
-      console.log(res);
+    
       this.userInfo=res
       
     },

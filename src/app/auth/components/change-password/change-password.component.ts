@@ -37,21 +37,15 @@ export class ChangePasswordComponent {
   }
 
 
-  
-    
-    
-
-
   onSubmit(data: FormGroup) {
-    console.log(data);
+  
     this._AuthService.changePassword(data.value).subscribe({
       next: (res) => {
-        console.log(res);
+      
         this._toastrService.success(res.message)
        
       },
       error: (err) => {
-        console.log(err);
         this._toastrService.warning(err.error.message)
       },complete:()=>{
         this.onClose()
