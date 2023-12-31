@@ -19,6 +19,10 @@ import { VerifyComponent } from '../verify/verify.component';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  hide: boolean = true;
+  confirmHide: boolean = true;
+  imgSrc: any;
+  hideRequiredMarker:boolean=true;
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
@@ -26,10 +30,7 @@ export class RegisterComponent {
     public _MatDialog: MatDialog,
     
   ) {}
-  hide: boolean = true;
-  confirmHide: boolean = true;
-
-  imgSrc: any;
+  
   registerForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),
@@ -44,8 +45,10 @@ export class RegisterComponent {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
       ]),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)])
     },
     {
       validators: this.matchValidator('password', 'confirmPassword'),
@@ -90,7 +93,6 @@ export class RegisterComponent {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
 
-    // console.log(data.value)
 
     this._AuthService.onRegister(myData).subscribe(
       (res) => {
@@ -114,13 +116,13 @@ export class RegisterComponent {
   files: File[] = [];
 
   onSelect(event: any) {
-    console.log(event.addedFiles[0].name);
+    
     this.imgSrc = event.addedFiles[0];
     this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
-    console.log(event);
+    
     this.files.splice(this.files.indexOf(event), 1);
   }
 }

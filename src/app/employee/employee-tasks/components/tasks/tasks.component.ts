@@ -34,12 +34,11 @@ getMyTasks(){
   }
   this._employeeService.getMyAssignedTasks(params).subscribe({
     next:(res)=>{
-      console.log(res);
+     
       for (let task of res.data) {
-        console.log(task.status);
+        
         if(task.status == 'ToDo'){
 this.todo.push(task)
-console.log(this.todo);
 
         }else if (task.status == 'InProgress') {
           this.inprogress.push(task)
@@ -61,15 +60,12 @@ console.log(this.todo);
   basket = ['Oranges', 'Bananas', 'Cucumbers'];
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event.container.id);
-    console.log(event);
+   
     const draggedItemId = event.item.data;
-    console.log(draggedItemId);
-    
     
     this._employeeService.changeTaskStatus(draggedItemId,event.container.id).subscribe({
       next:(res)=>{
-        console.log(res);
+      
         this._toastr.success(`Task Adedd to ${res.status}`)
       },error:(err)=>{
 

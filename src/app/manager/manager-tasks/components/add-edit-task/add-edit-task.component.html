@@ -2,7 +2,7 @@
     <div class="page-header shadow-sm">
         <div>
             <a routerLink="/dashboard/manager/tasks">
-                <i class="fa-solid fa-angle-left"></i>
+                <i class="fa-solid fa-angle-left me-2"></i>
                 <span>View All Tasks</span>
             </a>
             <h1>{{ isUpdatePage ? "Update Task" : "Add New Task" }}</h1>
@@ -16,7 +16,7 @@
                 <div class="mt-4">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label class="text-dark">Title</mat-label>
-                        <input formControlName= "title" class="text-danger" matInput placeholder="Placeholder">
+                        <input formControlName= "title" class="text-dark" matInput placeholder="Placeholder">
                         <mat-error *ngIf="taskForm.controls.title.hasError('required')">
                              Title required
                         </mat-error>
@@ -25,7 +25,7 @@
                 <div class="my-3">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label class="text-dark">Description</mat-label>
-                        <textarea formControlName = "description" class="text-danger" matInput placeholder="Placeholder"></textarea>
+                        <textarea formControlName = "description" class="text-dark" matInput placeholder="Placeholder"></textarea>
                         <mat-error *ngIf="taskForm.controls.description.hasError('required')">
                             Description required
                        </mat-error>
@@ -35,7 +35,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label class="text-dark">Employee</mat-label>
-                            <mat-select formControlName = "employeeId" class="text-danger">
+                            <mat-select formControlName = "employeeId" class="text-dark">
                                 <mat-option *ngFor="let item of users" [value]="item.id">
                                     {{item.userName}}
                                 </mat-option>
@@ -48,7 +48,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label class="text-dark">Project</mat-label>
-                            <mat-select formControlName = "projectId" class="text-danger">
+                            <mat-select formControlName = "projectId" class="text-dark">
                                 <mat-option *ngFor="let item of projects" [value]="item.id">
                                     {{item.title}}
                                 </mat-option>

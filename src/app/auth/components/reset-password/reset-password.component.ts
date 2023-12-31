@@ -11,10 +11,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
+  hide: boolean = true;
+  hideRequiredMarker:boolean=true;
   constructor(private _AuthService: AuthService, private _toastr: ToastrService, private _router: Router,
     ) { }
-
-  hide: boolean = true;
 
   resetForm = new FormGroup({
     email: new FormControl(localStorage.getItem('email'), [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
@@ -36,15 +36,13 @@ export class ResetPasswordComponent {
     }
   }
   onSubmit(data: FormGroup) {
-    console.log(data);
-   
+  
     this._AuthService.resetPassword(data.value).subscribe({
       next: (res) => {
-        console.log(res);
 
       },
       error: (err) => {
-        console.log(err);
+      
         this._toastr.error(err.error.message)
       },
       complete: () => {

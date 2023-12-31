@@ -31,3 +31,6 @@
   border: 0.7px solid rgba(38, 56, 90, 0.25);
 }
 
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
+  color: black !important;
+}  

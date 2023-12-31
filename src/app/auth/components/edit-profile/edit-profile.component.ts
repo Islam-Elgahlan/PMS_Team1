@@ -16,6 +16,15 @@ export class EditProfileComponent {
   confirmHide: boolean = true;
   currentUser: any;
   imgSrc: any;
+  role :string |undefined = localStorage.getItem('role')?.toLowerCase();
+
+  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
+    private _Router: Router, private _HelperService: HelperService,
+    private spinner: NgxSpinnerService) { }
+  ngOnInit() {
+    this.onGetCurrentUser()
+  }
+
   updateForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),
@@ -27,18 +36,10 @@ export class EditProfileComponent {
         Validators.maxLength(13),
       ]),
       profileImage: new FormControl(null),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)]),
     },
   );
-
-
-
-  constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,
-    private _Router: Router, private _HelperService: HelperService,
-    private spinner: NgxSpinnerService) { }
-  ngOnInit() {
-    this.onGetCurrentUser()
-  }
 
 
   onEdit(data: FormGroup) {
@@ -53,13 +54,12 @@ export class EditProfileComponent {
     } else {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
-    // console.log(myData)
-    // console.log(data.value)
+   
     this.spinner.show()
     this._AuthService.onEditProfile(myData).subscribe(
       (res) => {
-        this._ToastrService.success('Updated', 'Updated');
-        this._Router.navigate(['/dashboard']);
+        this._ToastrService.success('Your Profile Updated', 'Updated');
+        this._Router.navigate([`/dashboard/${this.role}/home`]);
         this.spinner.hide()
       },
       (error) => {
@@ -71,7 +71,7 @@ export class EditProfileComponent {
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
       this.currentUser = res;
-      // console.log(this.currentUser)
+   
       this.imgSrc = 'http://upskilling-egypt.com:3003/' + this.currentUser.imagePath
       this.updateForm.patchValue({
         userName: this.currentUser?.userName,
@@ -87,13 +87,11 @@ export class EditProfileComponent {
   files: File[] = [];
 
   onSelect(event: any) {
-    console.log(event.addedFiles[0].name);
     this.imgSrc = event.addedFiles[0];
     this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 }

@@ -11,13 +11,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent {
+  hide: any;
   constructor(
     private _AuthService: AuthService,
     private router: Router,
     private _ToastrService: ToastrService,
    
   ) {}
-  hide: any;
+ 
 
   verifyForm = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),

@@ -7,24 +7,36 @@
     </button>
   </div>
   <div class="table-card container py-5">
-    <div class="input-group w-25 mb-3">
-      <mat-form-field>
-        <mat-label>Filter </mat-label>
-        <mat-select [(value)]="status" (selectionChange)="openTasks()">
-            <mat-option value="ToDo">ToDo</mat-option>
-            <mat-option value="InProgress">InProgress</mat-option>
-            <mat-option value="Done">Done</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="w-100 ">
+          <mat-label>Search by task</mat-label>
+          <input matInput placeholder="Search Here" #searchInput (keyup)="search(searchInput.value)">
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+          <mat-form-field class="w-100 ">
+            <mat-label>Filter by status</mat-label>
+            <mat-select [(value)]="status" (selectionChange)="openTasks()">
+                <mat-option value="">All</mat-option>
+                <mat-option value="ToDo">ToDo</mat-option>
+                <mat-option value="InProgress">InProgress</mat-option>
+                <mat-option value="Done">Done</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
     </div>
+  
+   
+
     <table class="custom-table">
       <thead class="text-capitalize">
-        <th class="px-2 alone">Title</th>
+        <th class="px-2 alone">Task</th>
         <th class="alone">Status</th>
         <th class="alone">User</th>
         <th class="alone">Project</th>
         <th class="alone">creation Date</th>
-        <th class="alone"></th>
+        <th class="alone">actions</th>
       </thead>
       <tbody>
         <tr

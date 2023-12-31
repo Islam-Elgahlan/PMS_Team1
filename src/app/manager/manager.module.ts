@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ManagerRoutingModule } from './manager-routing.module';
 import { SharedModule } from '../shared/shared.module';
-
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 import { ManagerComponent } from './components/manager/manager.component';

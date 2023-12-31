@@ -2,7 +2,7 @@
     <div class="page-header shadow-sm">
         <div>
             <a routerLink="/dashboard/manager/projects">
-                <i class="fa-solid fa-angle-left"></i>
+                <i class="fa-solid fa-angle-left me-2"></i>
                 <span>View All Projects</span>
             </a>
             <h1>{{ isUpdatePage ? "Update Project" : "Add New Project" }}</h1>
@@ -16,7 +16,7 @@
                 <div class="mt-4">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label class="text-dark">Title</mat-label>
-                        <input formControlName= "title" class="text-danger" matInput placeholder="Placeholder">
+                        <input formControlName= "title" class="text-dark" matInput placeholder="Placeholder">
                         <mat-error *ngIf="projectForm.controls.title.hasError('required')">
                              Title required
                         </mat-error>
@@ -25,7 +25,7 @@
                 <div class="my-3">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label class="text-dark">Description</mat-label>
-                        <textarea class="text-danger" formControlName = "description" matInput placeholder="Placeholder"></textarea>
+                        <textarea class="text-dark" formControlName = "description" matInput placeholder="Placeholder"></textarea>
                         <mat-error *ngIf="projectForm.controls.description.hasError('required')">
                             Description required
                        </mat-error>

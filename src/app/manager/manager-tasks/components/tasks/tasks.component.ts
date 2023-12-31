@@ -4,6 +4,7 @@ import { TaskService } from '../../services/task.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
+import { Subject, debounceTime } from 'rxjs';
 
 
 @Component({
@@ -21,19 +22,27 @@ export class TasksComponent {
   pageIndex : number = 0
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
+  searchValue: string = '';
+  private subject=new Subject<any>;
 
-  constructor(private _TaskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
+  constructor(private _taskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
     ) { }
   ngOnInit() {
     this.openTasks();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.openTasks()
+      },
+    })
   }
   openTasks() {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
-      status: this.status
+      status: this.status,
+      title : this.searchValue
     }
-    this._TaskService.getAllTasks(params).subscribe({
+    this._taskService.getAllTasks(params).subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
@@ -66,7 +75,7 @@ export class TasksComponent {
    
   }
   deleteItem(id:number){
-      this._TaskService.deleteTask(id).subscribe({
+      this._taskService.deleteTask(id).subscribe({
         next:(res)=>{
           console.log(res);
           
@@ -85,6 +94,10 @@ export class TasksComponent {
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.openTasks()
+  }
+  search(term: string) {
+    this.searchValue = term
+    this.subject.next(this.searchValue)
   }
  
 }

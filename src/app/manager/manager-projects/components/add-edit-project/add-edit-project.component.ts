@@ -17,13 +17,8 @@ export class AddEditProjectComponent {
   isUpdatePage: boolean = false;
   projectData: any;
 
-  projectForm = new FormGroup({
-    title: new FormControl(null, [Validators.required]),
-    description: new FormControl(null, [Validators.required])
-
-  })
-
-  constructor(private _ManagerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
+ 
+  constructor(private _managerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _ToastrService: ToastrService , 
     ) {
     this.projectId = _ActivatedRoute.snapshot.paramMap.get('id')
@@ -46,12 +41,18 @@ export class AddEditProjectComponent {
     }
   }
 
+  projectForm = new FormGroup({
+    title: new FormControl(null, [Validators.required]),
+    description: new FormControl(null, [Validators.required])
+
+  })
+
   onSubmit(data: FormGroup) {
     if(this.projectId){
 
       // Edit
      
-        this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
+        this._managerService.editProject(data.value , this.projectId).subscribe((res)=>{
           this._ToastrService.success(res.message, 'Updated ');
           this._Router.navigate(['dashboard/manager/projects'])
           
@@ -65,7 +66,7 @@ export class AddEditProjectComponent {
 
       // Add New
      
-      this._ManagerService.onAddProject(data.value).subscribe((res) => {
+      this._managerService.onAddProject(data.value).subscribe((res) => {
         console.log(res);
         this._ToastrService.success('Project Added', 'Added ');
         this._Router.navigate(['dashboard/manager/projects'])
@@ -82,7 +83,7 @@ export class AddEditProjectComponent {
   }
 
   getProjectDataById(id: number) {
-    this._ManagerService.getProjectById(id).subscribe(
+    this._managerService.getProjectById(id).subscribe(
       ({
         next: (res) => {
           this.projectData = res;
@@ -103,7 +104,7 @@ export class AddEditProjectComponent {
 
   }
   viewProjectDataById(id: number) {
-    this._ManagerService.getProjectById(id).subscribe(
+    this._managerService.getProjectById(id).subscribe(
       ({
         next: (res) => {
           this.projectData = res;
