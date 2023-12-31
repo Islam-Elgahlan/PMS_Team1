@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, debounceTime } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 
 @Component({
@@ -93,3 +95,7 @@ export class ProjectsComponent {
     this.subject.next(this.searchValue)
   }
 }
+
+
+
+

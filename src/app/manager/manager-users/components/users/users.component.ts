@@ -6,8 +6,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUserComponent } from './block-user/block-user.component';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject, debounceTime } from 'rxjs';
-
 
 @Component({
   selector: 'app-users',
