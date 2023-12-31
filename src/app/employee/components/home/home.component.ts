@@ -7,16 +7,17 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  userName :any;
   constructor(private _HelperService:HelperService){}
   ngOnInit(): void {
     this.onGetCurrentUser()
   }
-  userName :any;
+
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
-      // console.log(res)
+      
       this.userName = res.userName;
-      // console.log(this.currentUser.imagePath)
+  
     })
   }
 }

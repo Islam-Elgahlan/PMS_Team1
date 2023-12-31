@@ -1,0 +1,27 @@
+<section class="h-100">
+    <div class="container  p-5">
+        <div class="row mt-5  p-3 ">
+         <div class="col-md-4">
+            <div class="user-image text-center">
+                <img *ngIf="userInfo.imagePath" src='http://upskilling-egypt.com:3003/{{userInfo.imagePath}}' alt="">
+                <img *ngIf="!userInfo.imagePath" src="../../../../../assets/images/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg" alt="">
+            
+            </div>
+         </div>
+         <div class="col-md-8">
+            <div class="user-content">
+                <h2><span>User Name:</span>{{userInfo.userName}}</h2>
+                <h2><span>Phone Number:</span>{{userInfo.phoneNumber}}</h2>
+                <h2><span>Email:</span>{{userInfo.email}}</h2>
+                <h2><span>Country:</span>{{userInfo.country}}</h2>
+              
+
+            </div>
+           
+         </div>
+         <div class="text-end">
+            <button class="outline-secondary px-5" routerLink="/dashboard/manager/users">Close</button>
+        </div>
+        </div>
+    </div>
+</section>

@@ -4,7 +4,8 @@ import { IProject, IProjects } from 'src/app/models/project';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Subject, debounceTime } from 'rxjs';
+
 
 @Component({
   selector: 'app-projects',
@@ -23,20 +24,35 @@ export class ProjectsComponent {
   pageNumber: number | undefined = 1;
   tableResponse: IProjects | undefined;
   tableData: IProject[] | undefined = [];
+  searchValue: string = '';
+  private subject=new Subject<any>;
+  
+  constructor(private _managerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
+  ) { }
+
   ngOnInit() {
-    this.onGetAllProjects();
+    this.onGetAllProjects()
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.onGetAllProjects()
+      },
+    })
   }
+
   onGetAllProjects() {
     let params = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
+      title : this.searchValue
     };
-    this.spinner.show();
-    this._ManagerService.getAllProjects(params).subscribe({
+    ;
+    this._managerService.getAllProjects(params).subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
-        this.spinner.hide();
+        localStorage.setItem('projectsCount', '')
+    }, (error) => {
+;
         localStorage.setItem(
           'projectsCount',
           JSON.stringify(res.totalNumberOfRecords)
@@ -67,7 +83,7 @@ export class ProjectsComponent {
     });
   }
   deleteItem(id: number) {
-    this._ManagerService.deleteProject(id).subscribe({
+    this._managerService.deleteProject(id).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -84,5 +100,9 @@ export class ProjectsComponent {
     this.pageNumber = e.pageIndex;
     console.log(e);
     this.onGetAllProjects();
+  }
+  search(term: string) {
+    this.searchValue = term
+    this.subject.next(this.searchValue)
   }
 }

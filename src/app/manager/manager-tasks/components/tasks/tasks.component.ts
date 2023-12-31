@@ -4,8 +4,9 @@ import { TaskService } from '../../services/task.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Subject, debounceTime } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-tasks',
@@ -16,25 +17,37 @@ export class TasksComponent {
   // tasksList: ITasks[] = [];
   tableResponse: ITasks | undefined;
   tableData: ITask[] | undefined = [];
-  pageSize: number | undefined;
-  pageNumber: number | undefined;
-  constructor(
-    private _TaskService: TaskService,
-    private _toastr: ToastrService,
-    public dialog: MatDialog,
-    private spinner: NgxSpinnerService
-  ) {}
+  status: string = ''
+  viewFlag:boolean=true
+  pageIndex : number = 0
+  pageSize: number = 5;
+  pageNumber: number | undefined = 1;
+  searchValue: string = '';
+  private subject=new Subject<any>;
+
+  constructor(private _taskService: TaskService,private _toastr:ToastrService,public dialog:MatDialog,
+    ) { }
   ngOnInit() {
     this.openTasks();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.openTasks()
+      },
+    })
   }
   openTasks() {
-    this.spinner.show();
-    this._TaskService.getAllTasks().subscribe({
+    let params = {
+      pageSize: this.pageSize,
+      pageNumber: this.pageNumber,
+      status: this.status,
+      title : this.searchValue
+    }
+    this._taskService.getAllTasks(params).subscribe({
       next: (res) => {
         console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
-        this.spinner.hide();
+     ;
         localStorage.setItem(
           'tasksCount',
           JSON.stringify(res.totalNumberOfRecords)
@@ -65,28 +78,30 @@ export class TasksComponent {
       }
     });
   }
-  deleteItem(id: number) {
-    this._TaskService.deleteTask(id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        this._toastr.error('Try Again');
-      },
-      complete: () => {
-        this._toastr.success('Project deleted Successfully');
-      },
-    });
+  deleteItem(id:number){
+      this._taskService.deleteTask(id).subscribe({
+        next:(res)=>{
+          console.log(res);
+          
+        },error:(err)=>{
+    this._toastr.error('Try Again')
+        },complete:()=> {
+          this._toastr.success('Project deleted Successfully')
+        },
+      })
   }
 
-  handlePageEvent(e: PageEvent) {
-    this.pageNumber = e.pageIndex;
-    this.pageSize = e.pageSize;
-    this.openTasks();
-
-    // this.pageEvent = e;
-    // this.length = e.length;
-    // this.pageSize = e.pageSize;
-    // this.pageIndex = e.pageIndex;
+  
+  handlePageEvent(e:any){
+    
+    console.log(e);
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
+    this.openTasks()
   }
+  search(term: string) {
+    this.searchValue = term
+    this.subject.next(this.searchValue)
+  }
+ 
 }

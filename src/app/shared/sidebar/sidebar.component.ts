@@ -13,18 +13,20 @@ interface Imenu {
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  ngOnInit() {
-    if (this.isManager()) {
-      this._Router.navigate(['/dashboard/manager/home']);
-    } else {
-      this._Router.navigate(['/dashboard/employee/home']);
+  @Output() isOpenedflag = new EventEmitter<boolean>();
+   isOpened:boolean=true;
+
+  constructor(private _auth:AuthService , private _Router :Router){ }
+  ngOnInit(){
+    if(this.isManager()){
+      this._Router.navigate(['/dashboard/manager/home'])
+    }else{
+      this._Router.navigate(['/dashboard/employee/home'])
     }
   }
-  @Output() isOpenedflag = new EventEmitter<boolean>();
-  isOpened: boolean = true;
-  constructor(private _auth: AuthService, private _Router: Router) {}
-  toggleSidebar() {
-    this.isOpened = !this.isOpened;
+
+toggleSidebar(){
+  this.isOpened=!this.isOpened;
 
     this.isOpenedflag.emit(this.isOpened);
   }

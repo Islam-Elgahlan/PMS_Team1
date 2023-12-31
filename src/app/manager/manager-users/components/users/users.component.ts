@@ -6,7 +6,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { BlockUserComponent } from './block-user/block-user.component';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Subject, debounceTime } from 'rxjs';
+
 
 @Component({
   selector: 'app-users',
@@ -15,18 +16,26 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UsersComponent implements OnInit {
   tableData: IEmployee[] = [];
+  searchValue: string = '';
+  pageIndex:number = 0
+  pageSize: number = 5;
+  pageNumber: number = 1;
+  tableRes: ITable | any;
+  private subject=new Subject<any>;
   constructor(
     private _user: UserService,
     public dialog: MatDialog,
     private _ToastrService: ToastrService,
-    private spinner: NgxSpinnerService
+    
   ) {}
-  searchValue: string = '';
-  pageSize: number = 5;
-  pageNumber: number = 1;
-  tableRes: ITable | any;
+  
   ngOnInit(): void {
     this.onGetAllUsers();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next:(res)=>{
+        this.onGetAllUsers()
+      },
+    })
   }
 
   onGetAllUsers() {
@@ -38,7 +47,7 @@ export class UsersComponent implements OnInit {
     this.spinner.show();
     this._user.getAllUsers(params).subscribe({
       next: (res) => {
-        console.log(res);
+       
         this.tableRes = res;
         this.tableData = res.data;
         this.spinner.hide();
@@ -50,15 +59,13 @@ export class UsersComponent implements OnInit {
 
   search() {
     console.log(this.searchValue);
-    this.onGetAllUsers();
+    this.subject.next(this.searchValue)
   }
 
   handlePageEvent(e: PageEvent) {
     console.log(e);
-    this.pageSize = e.pageSize;
-    // this.pageNumber=this.tableRes.pageNumber;
-    this.pageNumber = e.pageIndex;
-
+    this.pageSize = e.pageSize
+    this.pageNumber = e.pageIndex + 1
     this.onGetAllUsers();
   }
   openBlockDialog(item: IEmployee) {

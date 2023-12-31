@@ -10,6 +10,7 @@ import { ProjectsComponent } from './employee-projects/components/projects/proje
 @NgModule({
   declarations: [
     HomeComponent,
+    
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { VerifyComponent } from '../verify/verify.component';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-register',
@@ -19,17 +19,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  hide: boolean = true;
+  confirmHide: boolean = true;
+  imgSrc: any;
+  hideRequiredMarker:boolean=true;
   constructor(
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
     private _Router: Router,
     public _MatDialog: MatDialog,
-    private spinner: NgxSpinnerService
+    
   ) {}
-  hide: boolean = true;
-  confirmHide: boolean = true;
-
-  imgSrc: any;
+  
   registerForm = new FormGroup(
     {
       userName: new FormControl(null, [Validators.required]),
@@ -44,8 +45,10 @@ export class RegisterComponent {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)
       ]),
-      confirmPassword: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required,
+        Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/)])
     },
     {
       validators: this.matchValidator('password', 'confirmPassword'),
@@ -90,8 +93,7 @@ export class RegisterComponent {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
     }
 
-    // console.log(data.value)
-this.spinner.show()
+
     this._AuthService.onRegister(myData).subscribe(
       (res) => {
         this._ToastrService.success(
@@ -100,7 +102,7 @@ this.spinner.show()
         );
         localStorage.setItem('email', data.value.email);
         this._Router.navigate(['/auth/verify']);
-        this.spinner.hide()
+       
       },
       (error) => {
         this._ToastrService.error(
@@ -114,13 +116,13 @@ this.spinner.show()
   files: File[] = [];
 
   onSelect(event: any) {
-    console.log(event.addedFiles[0].name);
+    
     this.imgSrc = event.addedFiles[0];
     this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
-    console.log(event);
+    
     this.files.splice(this.files.indexOf(event), 1);
   }
 }

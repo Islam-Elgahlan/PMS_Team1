@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ManagerService } from '../../services/manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-add-edit-project',
@@ -17,15 +17,10 @@ export class AddEditProjectComponent {
   isUpdatePage: boolean = false;
   projectData: any;
 
-  projectForm = new FormGroup({
-    title: new FormControl(null, [Validators.required]),
-    description: new FormControl(null, [Validators.required])
-
-  })
-
-  constructor(private _ManagerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
+ 
+  constructor(private _managerService: ManagerService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _ToastrService: ToastrService , 
-    private spinner: NgxSpinnerService) {
+    ) {
     this.projectId = _ActivatedRoute.snapshot.paramMap.get('id')
     this.viewParam=_ActivatedRoute.snapshot.paramMap.get('params')
       console.log(this.viewParam);
@@ -46,15 +41,21 @@ export class AddEditProjectComponent {
     }
   }
 
+  projectForm = new FormGroup({
+    title: new FormControl(null, [Validators.required]),
+    description: new FormControl(null, [Validators.required])
+
+  })
+
   onSubmit(data: FormGroup) {
     if(this.projectId){
 
       // Edit
-        this.spinner.show()
-        this._ManagerService.editProject(data.value , this.projectId).subscribe((res)=>{
+     
+        this._managerService.editProject(data.value , this.projectId).subscribe((res)=>{
           this._ToastrService.success(res.message, 'Updated ');
           this._Router.navigate(['dashboard/manager/projects'])
-          this.spinner.hide()
+          
         }, error => {
           this._ToastrService.error(error.message, 'Error!');
         })
@@ -64,12 +65,12 @@ export class AddEditProjectComponent {
     }else{
 
       // Add New
-      this.spinner.show()
-      this._ManagerService.onAddProject(data.value).subscribe((res) => {
+     
+      this._managerService.onAddProject(data.value).subscribe((res) => {
         console.log(res);
         this._ToastrService.success('Project Added', 'Added ');
         this._Router.navigate(['dashboard/manager/projects'])
-        this.spinner.hide()
+      
   
       }, error => {
         this._ToastrService.error(error.message, 'Error!');
@@ -82,7 +83,7 @@ export class AddEditProjectComponent {
   }
 
   getProjectDataById(id: number) {
-    this._ManagerService.getProjectById(id).subscribe(
+    this._managerService.getProjectById(id).subscribe(
       ({
         next: (res) => {
           this.projectData = res;
@@ -103,7 +104,7 @@ export class AddEditProjectComponent {
 
   }
   viewProjectDataById(id: number) {
-    this._ManagerService.getProjectById(id).subscribe(
+    this._managerService.getProjectById(id).subscribe(
       ({
         next: (res) => {
           this.projectData = res;

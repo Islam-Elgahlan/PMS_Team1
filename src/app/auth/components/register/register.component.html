@@ -32,7 +32,7 @@
                         <div class="row">
                             
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>User Name</mat-label>
                                     <input formControlName="userName" matInput placeholder="Enter User Name" />
                                     <mat-error *ngIf="registerForm.controls.userName.hasError('required')">
@@ -41,7 +41,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Email</mat-label>
                                     <input formControlName="email" matInput placeholder="Enter Your E-mail" />
                                     <mat-error
@@ -54,7 +54,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Country</mat-label>
                                     <input formControlName="country" matInput placeholder="Enter Country" />
                                     <mat-error *ngIf="registerForm.controls.country.hasError('required')">
@@ -63,7 +63,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Phone Number</mat-label>
                                     <input formControlName="phoneNumber" matInput placeholder="Enter Phone Number" />
                                     <mat-error *ngIf="registerForm.controls.phoneNumber.hasError('required')">
@@ -78,7 +78,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Password</mat-label>
                                     <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
                                     <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
@@ -90,10 +90,14 @@
                                     <mat-error *ngIf="registerForm.controls.password.hasError('required')">
                                         Password required
                                     </mat-error>
+                                    <mat-error
+                                        *ngIf="registerForm.controls.password.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100">
+                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Confirm Password</mat-label>
                                     <input formControlName="confirmPassword" matInput
                                         [type]="confirmHide ? 'password' : 'text'" />
@@ -105,6 +109,10 @@
                                     </button>
                                     <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
                                         Confirmed Password required
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="registerForm.controls.confirmPassword.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
                                     </mat-error>
                                     <mat-error
                                         *ngIf="registerForm.controls.confirmPassword.hasError('confirmedValidator')">

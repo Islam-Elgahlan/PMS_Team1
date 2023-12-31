@@ -21,9 +21,13 @@
             </button>
             <mat-menu #menu="matMenu">
 
-              <button routerLink="/auth/edit-profile" mat-menu-item>
+              <button routerLink="/dashboard/{{role}}/edit-profile" mat-menu-item>
                 <mat-icon>person</mat-icon>
                 <span>Profile</span>
+              </button>
+              <button (click)="openDialog()" mat-menu-item>
+                <mat-icon >visibility</mat-icon>
+                <span>Change Password</span>
               </button>
               <button (click)="logOut()" mat-menu-item>
                 <mat-icon>logout</mat-icon>

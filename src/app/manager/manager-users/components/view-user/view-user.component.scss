@@ -1,0 +1,28 @@
+section{
+    .row{
+       background-color: #13473c33; 
+       border-radius: 15px;
+       box-shadow: 1px 1px  10px #c3c7c651;
+        .user-image{
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                border: #13473ca6 solid 1px;
+                box-shadow: 1px 1px  10px #c3c7c651;
+            }
+        }
+        .user-content{
+           
+            h2{
+                color: #EF9B28;
+                span{
+                    color: #13473c;
+                    font-size: 20px;
+                    margin-right: 2px;
+                }
+            }
+        }
+    }
+  
+}

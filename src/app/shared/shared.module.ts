@@ -10,12 +10,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
