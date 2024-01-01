@@ -33,9 +33,9 @@ export class RegisterComponent {
   
   registerForm = new FormGroup(
     {
-      userName: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      country: new FormControl(null, [Validators.required]),
+      userName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-z]{3,10}[0-9]{1,5}$/)]),
+      email: new FormControl(null, [Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      country: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z]{2,20}$/)]),
       phoneNumber: new FormControl(null, [
         Validators.required,
         Validators.minLength(11),
