@@ -1,3 +1,19 @@
-<p>
-  log-out works!
-</p>
+<section class="logout">
+  <h2 mat-dialog-title class="w-100 p-3 text-white fw-normal">
+    Are you sure you want to logout?
+  </h2>
+
+  <div mat-dialog-actions class="d-flex justify-content-between">
+    <button
+      (click)="onLogout()"
+      class="btn button primary px-3 mb-2 text-white"
+      mat-button
+      cdkFocusInitial
+    >
+      Yes
+    </button>
+    <button class="btn mb-2 outline-secondary" mat-button (click)="onNoClick()">
+      Cancel
+    </button>
+  </div>
+</section>
