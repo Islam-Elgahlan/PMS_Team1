@@ -11,10 +11,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ChangePasswordComponent {
  
-  hide: boolean = true;
-  hide1: boolean = true;
-  hide2: boolean = true;
-
+  hidePassword: boolean = true;
+  hideNewPassword: boolean = true;
+  hideConfirm: boolean = true;
+  hideRequiredMarker:boolean=true;
 
   constructor(private _AuthService: AuthService,private _toastrService:ToastrService,
     public dialogRef: MatDialogRef<ChangePasswordComponent>) {}

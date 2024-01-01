@@ -16,6 +16,7 @@ export class EditProfileComponent {
   confirmHide: boolean = true;
   currentUser: any;
   imgSrc: any;
+  hideRequiredMarker:boolean=true;
   role :string |undefined = localStorage.getItem('role')?.toLowerCase();
 
   constructor(private _AuthService: AuthService, private _ToastrService: ToastrService,

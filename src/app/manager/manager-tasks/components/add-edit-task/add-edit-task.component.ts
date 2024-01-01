@@ -20,7 +20,7 @@ export class AddEditTaskComponent {
   projects: IProject [] = []
   users: IEmployee [] =[]
   viewTask:any;
-
+  hideRequiredMarker:boolean=true;
 
   constructor(private _taskService: TaskService, private _ActivatedRoute: ActivatedRoute,
     private _Router: Router, private _toastrService: ToastrService , private _HelperService:HelperService , 

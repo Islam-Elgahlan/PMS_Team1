@@ -33,7 +33,7 @@ $PMS-theme: mat.define-light-theme((color: (primary: $PMS-primary,
 @import "./assets/myStyles/main.scss";
 html,
 body {
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden
 }
 

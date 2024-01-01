@@ -16,6 +16,7 @@ export class AddEditProjectComponent {
   viewParam:any
   isUpdatePage: boolean = false;
   projectData: any;
+  hideRequiredMarker:boolean=true;
 
  
   constructor(private _managerService: ManagerService, private _ActivatedRoute: ActivatedRoute,

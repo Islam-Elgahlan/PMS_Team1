@@ -7,7 +7,7 @@
       <div class="col-md-10 d-flex justify-content-end ">
         <div class="d-flex align-items-center mt-2" *ngIf="currentUser">
           <div class="profile-img me-3">
-            <img *ngIf="currentUser.imagePath" src='http://upskilling-egypt.com:3003/{{currentUser.imagePath}}' >
+            <img *ngIf="currentUser.imagePath" class="w-100 d-block" src='http://upskilling-egypt.com:3003/{{currentUser.imagePath}}' >
             <img *ngIf="!currentUser.imagePath" class="w-100 d-block"
               src="../../../assets/images/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg" alt="">
           </div>

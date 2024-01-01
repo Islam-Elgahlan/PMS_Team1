@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class VerifyComponent {
   hide: any;
+  hideRequiredMarker:boolean=true;
+  
   constructor(
     private _AuthService: AuthService,
     private router: Router,

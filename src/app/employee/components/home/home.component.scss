@@ -1,19 +1,23 @@
-#home{
-    background-image: url('../../../../assets/images/home-bg.png');
-    background-position: center;
-    background-size: cover;
-    height: 45vh;
-    display: flex;
-    align-items: center;
-    border-radius: 15px;
-    padding: 0px 1rem;
-    margin-top: 1rem;
-    .home-content{
-        h3{
-            font-size: 30px;
-        }
-        p{
-            font-size: 20px;
+section{
+    
+    // margin: 5px 0;
+    #home{
+        background-image: url('../../../../assets/images/home-bg.png');
+        background-position: center;
+        background-size: cover;
+        height: 45vh;
+        display: flex;
+        align-items: center;
+        border-radius: 15px;
+        padding: 0px 1rem;
+        margin-top: 1rem;
+        .home-content{
+            h3{
+                font-size: 30px;
+            }
+            p{
+                font-size: 20px;
+            }
         }
     }
 }

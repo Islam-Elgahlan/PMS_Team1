@@ -38,7 +38,7 @@ getMyTasks(){
       for (let task of res.data) {
         
         if(task.status == 'ToDo'){
-this.todo.push(task)
+        this.todo.push(task)
 
         }else if (task.status == 'InProgress') {
           this.inprogress.push(task)
@@ -55,13 +55,11 @@ this.todo.push(task)
     },
   })
 }
-  items = ['Carrots', 'Tomatoes', 'Onions', 'Apples', 'Avocados'];
-
-  basket = ['Oranges', 'Bananas', 'Cucumbers'];
-
+ 
   drop(event: CdkDragDrop<string[]>) {
    
-    const draggedItemId = event.item.data;
+    const draggedItemId = event.item.data; 
+    // id
     
     this._employeeService.changeTaskStatus(draggedItemId,event.container.id).subscribe({
       next:(res)=>{

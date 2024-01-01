@@ -19,7 +19,7 @@
               <mat-error *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('required')">
                 Email required
               </mat-error>
-              <mat-error *ngIf="loginForm.controls.email.hasError('pattern')">
+              <mat-error *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('pattern')">
                 ex: abc@cde.ab
               </mat-error>
             </div>
@@ -38,7 +38,7 @@
               <mat-error *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('required')">
                 Password required
               </mat-error>
-                <mat-error *ngIf="loginForm.controls.password.hasError('pattern')">
+                <mat-error *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('pattern')">
                   A password must contains at least eight characters, including at least one number and includes both
                   lower and uppercase letters and special characters
                 </mat-error>
