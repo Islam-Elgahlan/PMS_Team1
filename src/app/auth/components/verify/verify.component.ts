@@ -23,7 +23,7 @@ export class VerifyComponent {
  
 
   verifyForm = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(localStorage.getItem('email'), [Validators.required, Validators.email]),
     code: new FormControl(null, [Validators.required]),
   });
 
