@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManagerComponent } from '../components/manager/manager.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { AddEditProjectComponent } from './components/add-edit-project/add-edit-project.component';
 
