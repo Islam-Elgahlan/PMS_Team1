@@ -3,40 +3,41 @@
 
         <div class="row">
             <div class="col-md-10 mx-auto">
-              
+
                 <div class="p-4 auth-card">
-                   <div class="row">
-                    <div class="col-md-4">
-                        <div class="title mb-2">
-                            <span>Welcome to PMS</span>
-                            <h3 class="fs-3">Edit Your Profile</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="title mb-2">
+                                <span>Welcome to PMS</span>
+                                <h3 class="fs-3">Edit Your Profile</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8 d-flex justify-content-end">
+                            <div>
+                                <ngx-dropzone class="user-avatar" (change)="onSelect($event)" [multiple]="false">
+                                    <ngx-dropzone-label *ngIf="!imgSrc">
+                                        <i class="fa-solid fa-arrow-up-from-bracket d-block"></i> Upload
+                                    </ngx-dropzone-label>
+                                    <ngx-dropzone-label class="m-0" *ngIf="imgSrc">
+                                        <img [src]="imgSrc" class="w-100" alt="">
+                                    </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                        *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-8 d-flex justify-content-end">
-                        <div >
-                            <ngx-dropzone class="user-avatar" (change)="onSelect($event)" [multiple]="false">
-                              <ngx-dropzone-label *ngIf="!imgSrc">
-                                <i class="fa-solid fa-arrow-up-from-bracket d-block"></i> Upload
-                              </ngx-dropzone-label>
-                              <ngx-dropzone-label class="m-0" *ngIf="imgSrc">
-                                <img  [src]="imgSrc"  class= "w-100"  alt="" >
-                              </ngx-dropzone-label>
-                              <ngx-dropzone-image-preview  ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                                [removable]="true" [file]="f" (removed)="onRemove(f)">
-                              </ngx-dropzone-image-preview>
-                            </ngx-dropzone>
-                          </div>
-                    </div>
-                   </div>
-                    
+
                     <form [formGroup]="updateForm" (ngSubmit)="onEdit(updateForm)">
                         <div class="row">
-                           
+
                         </div>
                         <div class="row">
-                            
+
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100"[hideRequiredMarker]="hideRequiredMarker">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>User Name</mat-label>
                                     <input formControlName="userName" matInput placeholder="Enter User Name" />
                                     <mat-error *ngIf="updateForm.controls.userName.hasError('required')">
@@ -45,7 +46,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Email</mat-label>
                                     <input formControlName="email" matInput placeholder="Enter Your E-mail" />
                                     <mat-error
@@ -58,7 +60,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Country</mat-label>
                                     <input formControlName="country" matInput placeholder="Enter Country" />
                                     <mat-error *ngIf="updateForm.controls.country.hasError('required')">
@@ -67,7 +70,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
-                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Phone Number</mat-label>
                                     <input formControlName="phoneNumber" matInput placeholder="Enter Phone Number" />
                                     <mat-error *ngIf="updateForm.controls.phoneNumber.hasError('required')">
@@ -82,7 +86,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6 mx-auto">
-                                <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>Password</mat-label>
                                     <input formControlName="confirmPassword" matInput
                                         [type]="confirmHide ? 'password' : 'text'" />
@@ -95,17 +100,18 @@
                                     <mat-error *ngIf="updateForm.controls.confirmPassword.hasError('required')">
                                         Password required
                                     </mat-error>
-                                    <mat-error
-                                        *ngIf="updateForm.controls.confirmPassword.hasError('pattern')">
-                                        A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters
+                                    <mat-error *ngIf="updateForm.controls.confirmPassword.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one
+                                        number and includes both lower and uppercase letters and special characters
                                     </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="text-center mt-3 d-flex justify-content-between">
-                            <button type="button" class="outline-secondary w-25" routerLink="/dashboard/{{role}}/home">Cancel</button>
+                            <button type="button" class="outline-secondary w-25"
+                                routerLink="/dashboard/{{role}}/home">Cancel</button>
                             <button class="primary text-center w-25 py-3">Save</button>
                         </div>
                     </form>
