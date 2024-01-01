@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ResetPasswordComponent {
   hide: boolean = true;
+  hideConfirm: boolean = true;
   hideRequiredMarker:boolean=true;
   constructor(private _AuthService: AuthService, private _toastr: ToastrService, private _router: Router,
     ) { }
