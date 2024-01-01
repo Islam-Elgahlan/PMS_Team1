@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { Subject, debounceTime } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -101,3 +103,8 @@ export class TasksComponent {
   }
  
 }
+
+
+
+
+
