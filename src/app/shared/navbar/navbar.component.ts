@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ChangePasswordComponent } from 'src/app/auth/components/change-password/change-password.component';
 import { HelperService } from 'src/app/services/helper.service';
+import { LogOutComponent } from './log-out/log-out.component';
 
 @Component({
   selector: 'app-navbar',
@@ -19,12 +20,15 @@ export class NavbarComponent implements OnInit {
     this.onGetCurrentUser()
   }
   logOut() {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userEmail');
-    this._Router.navigate(['/auth'])
+    const dialogRef = this.dialog.open(LogOutComponent, {
+      
+    });
+
+    
+   
   }
+  
+  
   currentUser :any;
   onGetCurrentUser() {
     this._HelperService.getCurrentUser().subscribe((res) => {
@@ -48,4 +52,17 @@ export class NavbarComponent implements OnInit {
       
     });
   }
+//   openBlockDialog(item: IEmployee) {
+//     const dialogRef = this.dialog.open(BlockUserComponent, {
+//       data: item,
+//     });
+
+//     dialogRef.afterClosed().subscribe((result) => {
+//       console.log('The dialog was closed', result);
+//       if (result) {
+//         this.onBlockUser(result);
+//       }
+//     });
+//   }
 }
+
