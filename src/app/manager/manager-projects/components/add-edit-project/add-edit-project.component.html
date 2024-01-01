@@ -14,7 +14,7 @@
         <form [formGroup]="projectForm" (ngSubmit)="onSubmit(projectForm)">
             <div class="form-card">
                 <div class="mt-4">
-                    <mat-form-field appearance="outline" class="w-100">
+                    <mat-form-field appearance="outline" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                         <mat-label class="text-dark">Title</mat-label>
                         <input formControlName= "title" class="text-dark" matInput placeholder="Placeholder">
                         <mat-error *ngIf="projectForm.controls.title.hasError('required')">
@@ -23,7 +23,7 @@
                     </mat-form-field>
                 </div>
                 <div class="my-3">
-                    <mat-form-field appearance="outline" class="w-100">
+                    <mat-form-field appearance="outline" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                         <mat-label class="text-dark">Description</mat-label>
                         <textarea class="text-dark" formControlName = "description" matInput placeholder="Placeholder"></textarea>
                         <mat-error *ngIf="projectForm.controls.description.hasError('required')">

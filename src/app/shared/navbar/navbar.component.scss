@@ -1,11 +1,15 @@
 section{
-
+height: 10vh;
+box-sizing: border-box;
     .profile-img{
         width: 50px;
         height: 50px;
         border-radius: 50%;
         overflow: hidden;
         border: 1px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
        
     }
   

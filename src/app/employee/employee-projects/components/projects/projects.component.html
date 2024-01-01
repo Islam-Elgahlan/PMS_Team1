@@ -1,15 +1,14 @@
 
 <section>
-    <div class="page-header shadow-lg">
-        <h1>My Projects</h1>
-    </div>
-    <div class="table-card container py-3">
-        <div>
-            <!-- search filter -->
+   
+    <div class=" container py-3">
+        <div class="page-header shadow-lg">
+            <h1>My Projects</h1>
         </div>
+       
         <table class="custom-table ">
             <thead class="text-capitalize">
-                <th class="px-2 alone">Title</th>
+                <th class=" alone">Title</th>
                 <th class="alone">description</th>
                 <th class="alone">No Of Tasks</th>
                 <th class="alone">creation Date</th>
@@ -28,7 +27,7 @@
                 </tr>
             </tbody>
         </table>
-        <div>
+        <div class="">
             <mat-paginator [length]="tableResponse?.totalNumberOfRecords" 
             [pageSizeOptions]="[5,10, 50, 100]" [pageSize]="tableResponse?.pageSize"
              (page)="handlePageEvent($event)" [pageIndex]="pageIndex"
