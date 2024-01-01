@@ -24,7 +24,7 @@ export class ProjectsComponent {
   searchValue: string = '';
   private subject=new Subject<any>;
   
-  constructor(private _managerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
+  constructor(private _ManagerService: ManagerService, public dialog: MatDialog, private _toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -43,10 +43,9 @@ export class ProjectsComponent {
       title : this.searchValue
     }
 
-    this._managerService.getAllProjects(params).subscribe((res) => {
+    this._ManagerService.getAllProjects(params).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
-      localStorage.setItem('projectsCount', '')
     }, (error) => {
 
     })
@@ -73,7 +72,7 @@ export class ProjectsComponent {
 
   }
   deleteItem(id: number) {
-    this._managerService.deleteProject(id).subscribe({
+    this._ManagerService.deleteProject(id).subscribe({
       next: (res) => {
         console.log(res);
 
@@ -85,7 +84,7 @@ export class ProjectsComponent {
     })
   }
   handlePageEvent(e: any) {
-    console.log(e);
+    // console.log(e);
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.onGetAllProjects()

@@ -46,7 +46,7 @@ export class TasksComponent {
     }
     this._taskService.getAllTasks(params).subscribe({
       next: (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
      
@@ -57,7 +57,7 @@ export class TasksComponent {
   }
 
   openAddDialog(data:any): void {
-    console.log(data);
+    // console.log(data);
     
     const dialogRef = this.dialog.open(DeleteItemComponent, {
      data:data, 
@@ -66,7 +66,7 @@ export class TasksComponent {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
+      // console.log(result);
       if(result){
         this.deleteItem(result.id)
         this.openTasks()
@@ -92,7 +92,7 @@ export class TasksComponent {
   
   handlePageEvent(e:any){
     
-    console.log(e);
+    // console.log(e);
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.openTasks()

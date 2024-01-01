@@ -58,8 +58,8 @@
       #paginator
       class="demo-paginator"
       (page)="handlePageEvent($event)"
-      [length]="tableRes.totalNumberOfRecords"
-      [pageSize]="tableRes.pageSize"
+      [length]="tableResponse?.totalNumberOfRecords"
+      [pageSize]="tableResponse?.pageSize"
       [pageSizeOptions]="[5, 10, 15, 20, 40, 100]"
       [pageIndex]="pageIndex"
       aria-label="Select page"

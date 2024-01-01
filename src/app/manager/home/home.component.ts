@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { HelperService } from 'src/app/services/helper.service';
+import { ManagerService } from '../manager-projects/services/manager.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,19 +10,20 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class HomeComponent implements OnInit {
   taskCount: any;
-  projectsCount = localStorage.getItem('projectsCount');
-  tasksCount = localStorage.getItem('tasksCount');
-  // usersCount = localStorage.getItem('usersCount');
-  constructor(private _HelperService: HelperService) {}
+  totalTasks: number = 0 ;
+  totalProjects :number = 0 ;
+  constructor(private _HelperService: HelperService , private _ManagerService:ManagerService ) {}
   ngOnInit(): void {
     this.getTaskCount();
     this.onGetCurrentUser();
+    this.onGetAllProjects();
   }
   getTaskCount() {
     this._HelperService.getTaskCount().subscribe({
       next: (res) => {
-        console.log(res);
+        
         this.taskCount = res;
+        this.totalTasks = this.taskCount.toDo + this.taskCount.inProgress + this.taskCount.done ;
       },
 
       error: (err) => {},
@@ -55,5 +58,16 @@ export class HomeComponent implements OnInit {
       this.userName = res.userName;
       // console.log(this.currentUser.imagePath)
     });
+  }
+
+  onGetAllProjects() {
+    let params = {
+      pageSize: 1000,
+      pageNumber: 1,
+    }
+
+    this._ManagerService.getAllProjects(params).subscribe((res) => {
+      this.totalProjects = res.totalNumberOfRecords;
+    })
   }
 }

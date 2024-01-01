@@ -14,7 +14,7 @@ export class HelperService {
     return this._HttpClient.get('Users' , {params:{pageSize:1000 , pageNumber:1}})
   }
   getTaskCount():Observable<any>{
-    return this._HttpClient.get('Task/count' )
+    return this._HttpClient.get('Task/count')
   }
   getCurrentUser():Observable<any>{
     return this._HttpClient.get('Users/currentUser');

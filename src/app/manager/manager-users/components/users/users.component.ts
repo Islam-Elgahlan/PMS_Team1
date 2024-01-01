@@ -15,24 +15,26 @@ import { Subject, debounceTime } from 'rxjs';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  tableData: IEmployee[] = [];
+
+  tableResponse: ITable | undefined;
+  tableData: IEmployee[] | undefined = [];
   searchValue: string = '';
-  pageIndex:number = 0
-  pageSize: number = 5;
-  pageNumber: number = 1;
-  tableRes: ITable | any;
-  private subject=new Subject<any>;
+  pageIndex: number = 0
+  pageSize: number | undefined = 5;
+  pageNumber: number | undefined = 1;
+
+  private subject = new Subject<any>;
   constructor(
     private _user: UserService,
     public dialog: MatDialog,
     private _ToastrService: ToastrService,
-    
-  ) {}
-  
+
+  ) { }
+
   ngOnInit(): void {
     this.onGetAllUsers();
     this.subject.pipe((debounceTime(800))).subscribe({
-      next:(res)=>{
+      next: (res) => {
         this.onGetAllUsers()
       },
     })
@@ -44,16 +46,17 @@ export class UsersComponent implements OnInit {
       pageNumber: this.pageNumber,
       userName: this.searchValue,
     };
-   
+
     this._user.getAllUsers(params).subscribe({
       next: (res) => {
-       
-        this.tableRes = res;
-        this.tableData = res.data;
-    
+
+        this.tableResponse = res;
+        this.tableData = res?.data;
+        // console.log(this.tableResponse.totalNumberOfRecords);
+
       },
-      error: (err) => {},
-      complete: () => {},
+      error: (err) => { },
+      complete: () => { },
     });
   }
 
@@ -63,7 +66,7 @@ export class UsersComponent implements OnInit {
   }
 
   handlePageEvent(e: PageEvent) {
-    console.log(e);
+    // console.log(e);
     this.pageSize = e.pageSize
     this.pageNumber = e.pageIndex + 1
     this.onGetAllUsers();
@@ -90,7 +93,7 @@ export class UsersComponent implements OnInit {
             : 'This user was blocked Successfully',
           'Done'
         );
-      
+
       },
       error: (err) => {
         this._ToastrService.error('Can’tBlock this User', 'Error');

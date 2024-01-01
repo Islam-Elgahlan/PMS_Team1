@@ -22,7 +22,7 @@ export class AuthService {
     localStorage.setItem('userName', decoded.userName);
     localStorage.setItem('userEmail', decoded.userEmail);
     this.getRole()
-    console.log(decoded);
+    // console.log(decoded);
   }
 
   getRole() {
