@@ -73,7 +73,7 @@ export class EditProfileComponent {
     this._HelperService.getCurrentUser().subscribe((res) => {
       this.currentUser = res;
    
-      this.imgSrc = 'http://upskilling-egypt.com:3003/' + this.currentUser.imagePath
+      this.imgSrc = 'https://upskilling-egypt.com:3003/' + this.currentUser.imagePath
       this.updateForm.patchValue({
         userName: this.currentUser?.userName,
         email: this.currentUser?.email,
